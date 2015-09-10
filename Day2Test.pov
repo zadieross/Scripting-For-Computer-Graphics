@@ -1,6 +1,9 @@
 background{
      rgb <0,0,1>
-}   
+} 
+
+#declare FrontCameraPos = <0,0,-10>;
+#declare TopCameraPos = <0,10,0>;  
  
 #declare SpherePos = <0,1,0>;
 sphere{
@@ -68,4 +71,16 @@ plane{
             rgb<0,1,0>
         }
     }
-}
+}       
+#declare Box = box{
+    <-1,-1,-1>
+    <1,1,1>
+    pigment{
+            rgb<0,1,0>
+        }
+    }                
+    
+/*object{
+    Box
+    scale<1,.5,.5>
+} */

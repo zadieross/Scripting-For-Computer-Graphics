@@ -11,7 +11,11 @@
             rgb <1,0,0>
         }
     }
-
+#declare SolidGreen =  texture{
+        pigment{ 
+            rgb <0,1,0>
+        }
+    }
 
 
 camera{
@@ -44,13 +48,30 @@ object {
     Post
 }
 
-#declare BackBoardWidth = 2;
+#declare BackBoardX = 2;
+#declare BackBoardY = 1;
+#declare BackBoardZ = .5;
 #declare BackBoard = box{
-    <(-BackBoardWidth/2),(PostHeight-1),-PostWidth>
-    <(BackBoardWidth/2),PostHeight,-(PostWidth+.5)> 
+    <(-BackBoardX/2),(PostHeight-BackBoardY),-PostWidth>
+    <(BackBoardX/2),PostHeight,-(PostWidth+BackBoardZ)> 
      texture{SolidRed}
 }     
 
 object{ 
     BackBoard
-}
+}    
+
+#declare OuterHoop = .5;
+#declare InnerHoop = .1;
+#declare Hoop = torus{ 
+    OuterHoop
+    InnerHoop 
+    translate <0,PostHeight-(BackBoardY/2),-(PostWidth+BackBoardZ+OuterHoop)>  
+    texture{SolidGreen}
+} 
+
+object{  
+    Hoop  
+    
+} 
+   

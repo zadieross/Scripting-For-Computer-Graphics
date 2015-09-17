@@ -74,4 +74,23 @@ object{
     Hoop  
     
 } 
-   
+
+
+#declare NetY =  PostHeight-(BackBoardY/2);
+#declare NetZ =  -(HalfPostWidth+BackBoardZ+OuterHoop);
+#declare NetOpening = .3;
+#declare Net = cone{  
+     <0,PostHeight-(BackBoardY/2),-(HalfPostWidth+BackBoardZ+OuterHoop)>
+     OuterHoop
+     <0,NetY-.5,NetZ-.5> 
+     OuterHoop - NetOpening 
+     texture{
+        pigment{ 
+            rgbf <0,1,1,.8>
+            }
+        }
+     }
+                            
+object{
+    Net
+}

@@ -49,13 +49,14 @@ light_source{
 }
 #declare MugCutout = box{
     MugPos + <2,-.4,2>  
-    MugPos + <-2,-.5,-2> 
+    MugPos + <-2,-4,-2> 
     texture{SolidGreen}
     }
-    
-object {
-    MugBase
-}
-object{
-    MugCutout
+difference{    
+    object {
+        MugBase
+    }
+    object{
+        MugCutout
+    }
 }

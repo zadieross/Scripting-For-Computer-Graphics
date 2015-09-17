@@ -1,5 +1,6 @@
 #declare FrontCameraPos = <0,5,-10>;
-#declare TopCameraPos = <0,10,0>;   
+#declare TopCameraPos = <0,10,0>;
+#declare BottomCameraPos = <0,-10,0>;   
 
 #declare SolidPink =  texture{
         pigment{ 
@@ -24,7 +25,7 @@
 
 
 camera{
-    location FrontCameraPos  
+    location BottomCameraPos  
     look_at <0,0,0>
 } 
 
@@ -42,7 +43,7 @@ light_source{
 } 
 
 #declare MugPos = <0,1,0>;
-#declare MugBase = sphere{
+#declare MugBaseSphere = sphere{
     MugPos
     1
     texture{SolidRed}
@@ -50,13 +51,20 @@ light_source{
 #declare MugCutout = box{
     MugPos + <2,-.4,2>  
     MugPos + <-2,-4,-2> 
-    texture{SolidGreen}
     }
-difference{    
+#declare FlatBase = difference{    
     object {
-        MugBase
+        MugBaseSphere
     }
     object{
         MugCutout
     }
 }
+
+#declare TopBox = box{
+    MugPos + <4,0,4>
+    MugPos + <-4,2,-4>
+    texture{SolidPink}
+}                  
+object{ TopBox} 
+object{FlatBase}

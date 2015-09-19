@@ -1,6 +1,7 @@
 #declare FrontCameraPos = <0,5,-10>;
 #declare TopCameraPos = <0,10,0>;
-#declare BottomCameraPos = <0,-10,0>;   
+#declare BottomCameraPos = <0,-10,0>;
+#declare FarFrontCameraPos = <0,0,-20>;   
 
 #declare SolidPink =  texture{
         pigment{ 
@@ -21,11 +22,16 @@
         pigment{ 
             rgb <0.3,0,1>
         }
-    }
+    } 
+#declare SeeThroughGreen =  texture{
+        pigment{ 
+            rgbf <0,1,1,.8>
+            }
+        }
 
 
 camera{
-    location BottomCameraPos  
+    location FarFrontCameraPos  
     look_at <0,0,0>
 } 
 
@@ -41,6 +47,11 @@ light_source{
     <2,6,-10>
     rgb<1,1,1>        
 } 
+   
+light_source{
+    <0,-10,0>
+    rgb<1,1,1>        
+}    
 
 #declare MugPos = <0,1,0>;
 #declare MugBaseSphere = sphere{
@@ -48,23 +59,40 @@ light_source{
     1
     texture{SolidRed}
 }
-#declare MugCutout = box{
+#declare MugBaseCutout = box{
     MugPos + <2,-.4,2>  
-    MugPos + <-2,-4,-2> 
+    MugPos + <-2,-4,-2>  
+    texture{SolidRed}
     }
-#declare FlatBase = difference{    
+#declare MugFlatBase = difference{    
     object {
         MugBaseSphere
     }
     object{
-        MugCutout
+        MugBaseCutout
+    }
+}
+#declare MugTopBox = box{
+    MugPos + <1,.58,1>
+    MugPos + <-1,2,-1>
+    texture{SeeThroughGreen}
+}   
+#declare MugNegXTopCutout  =   sphere{
+    MugPos + <-1.6,1.2,0>
+    1
+    texture{SolidRed}
+}
+
+                  
+difference{    
+    object {
+        MugTopBox
+    }
+    object{
+        MugNegXTopCutout
     }
 }
 
-#declare TopBox = box{
-    MugPos + <4,0,4>
-    MugPos + <-4,2,-4>
-    texture{SolidPink}
-}                  
-object{ TopBox} 
-object{FlatBase}
+
+ 
+object{MugFlatBase}

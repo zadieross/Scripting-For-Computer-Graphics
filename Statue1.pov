@@ -1,6 +1,6 @@
 //Cammera Position List
 
-#declare FrontCameraPos = <0,0,-10>;
+#declare FrontCameraPos = <2,3,-10>;
 #declare TopCameraPos = <0,10,0>;
 #declare BottomCameraPos = <0,-10,0>;
 #declare FarFrontCameraPos = <0,0,-20>;
@@ -36,7 +36,7 @@
 //Basic scene stuff
 
 camera{
-    location FrontPosXTiltCameraPos  
+    location FrontCameraPos  
     look_at <0,0,0>
 } 
 
@@ -128,20 +128,50 @@ light_source{
     2
     texture{SolidRed}
 }
-#declare MugTopWithCuts = difference{
+#declare MugTopWithRCuts = difference{
     object{MugTopWithXPosZCut}
     object{MugNegZTopCutout}
 }
   
 //Mug Top Fine Cuts 
 
-#declare MugTopNegXFineCut = sphere{
-    MugPos + <0,1.2,-2.4>
+#declare MugTopQuadIIIFineCut = sphere{
+    MugPos + <-1.9,1.2,-1.9>
     2
     texture{SolidRed}
+}  
+#declare MugTopWithQuadIIICut = difference{ 
+    object{MugTopWithRCuts} 
+    object{MugTopQuadIIIFineCut}
 }
-  
-//Making the mug actually exist  
-  
-object{MugTopWithCuts} 
+#declare MugTopQuadIFineCut = sphere{
+    MugPos + <1.9,1.2,1.9>
+    2
+    texture{SolidRed}
+}  
+#declare MugTopWithQuadIandIIICut = difference{ 
+    object{MugTopWithQuadIIICut} 
+    object{MugTopQuadIFineCut}
+}
+#declare MugTopQuadIIFineCut = sphere{
+    MugPos + <-1.9,1.2,1.9>
+    2
+    texture{SolidRed}
+}  
+#declare MugTopWithQuadIthruIIICut = difference{ 
+    object{MugTopWithQuadIandIIICut} 
+    object{MugTopQuadIIFineCut}
+}
+#declare MugTopQuadIVFineCut = sphere{
+    MugPos + <1.9,1.2,-1.9>
+    2
+    texture{SolidRed}
+}  
+#declare MugTopWithFineCuts = difference{ 
+    object{MugTopWithQuadIthruIIICut} 
+    object{MugTopQuadIVFineCut}
+}
+
+
+object{MugTopWithFineCuts}
 object{MugFlatBase}

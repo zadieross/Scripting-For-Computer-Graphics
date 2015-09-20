@@ -201,11 +201,11 @@ light_source{
     object{HalfHandleTorus}
     object{HandleTorusSecondCutout}
 }
-#declare HandleLocation = <1.1,1.3,0>;
+#declare HandleLocation = MugPos + <1.1,.3,0>;
 #declare HandleTopCylinder = cylinder {
-    HandleLocation + <0,1.5,0>,
+    HandleLocation + <0.1,1.5,0>,
     HandleLocation + <-1.5,1.5,0>,    
-    0.16            
+    0.15            
     open              
     texture{SolidRed}
 }
@@ -218,9 +218,9 @@ light_source{
     object{HandleTopCylinder} 
 }
 #declare HandleBottomCylinder = cylinder {
-    HandleLocation + <.28,.6,0>,
+    HandleLocation + <.37,.65,0>,
     HandleLocation + <-1.5,-1.3,0>,    
-    0.16            
+    0.15            
     open              
     texture{SolidRed}
 }

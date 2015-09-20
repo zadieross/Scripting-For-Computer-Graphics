@@ -193,7 +193,9 @@ light_source{
 }  
 #declare HandleTorusSecondCutout = box{
     <0,-1,0>
-    <2,1,-2>    //figure out how to cut at an angle so the handle can reconnect to the body
+    <2,1,-2>
+    texture{SolidPink}
+    rotate<0,45,0>
 } 
 #declare HandleCurve = difference{
     object{HalfHandleTorus}
@@ -203,4 +205,8 @@ light_source{
 object{
     HandleCurve
     rotate <-90,0,0> 
+    translate (MugPos + <1.2,1.3,0>)
 }
+
+
+object{MugBody}

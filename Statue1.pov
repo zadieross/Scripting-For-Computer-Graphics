@@ -44,7 +44,7 @@ background{
      rgb <0.3,0,1>
 }             
 
-//McCandless Lighting with a bottom light in because that's proved helpful
+//McCandless Lighting (with a bottom light in because that's proved helpful)
 
 light_source{
     <-2,6,-10>
@@ -133,7 +133,7 @@ light_source{
     object{MugNegZTopCutout}
 }
   
-//Mug Top Fine Cuts 
+//Mug Top Fine Cuts and Merge
 
 #declare MugTopQuadIIIFineCut = sphere{
     MugPos + <-1.9,1.2,-1.9>
@@ -171,7 +171,36 @@ light_source{
     object{MugTopWithQuadIthruIIICut} 
     object{MugTopQuadIVFineCut}
 }
+#declare MugBody = merge{
+    object{MugTopWithFineCuts}
+    object{MugFlatBase} 
+}   
 
+//Handle
 
-object{MugTopWithFineCuts}
-object{MugFlatBase}
+#declare HandleTorus = torus{ 
+    .5
+    .15        
+    texture{SolidRed}
+} 
+#declare HandleTorusFirstCutout = box{
+    <0,-1,2>
+    <-2,1,-2>
+} 
+#declare HalfHandleTorus = difference{ 
+    object{HandleTorus}
+    object{HandleTorusFirstCutout}
+}  
+#declare HandleTorusSecondCutout = box{
+    <0,-1,0>
+    <2,1,-2>    //figure out how to cut at an angle so the handle can reconnect to the body
+} 
+#declare HandleCurve = difference{
+    object{HalfHandleTorus}
+    object{HandleTorusSecondCutout}
+}
+
+object{
+    HandleCurve
+    rotate <-90,0,0> 
+}

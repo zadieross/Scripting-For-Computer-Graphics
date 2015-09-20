@@ -16,6 +16,18 @@ sphere{
     }
 }
 
+cylinder {
+    <0, 1, 0>,     // Center of one end
+    <1, 2, 3>,     // Center of other end
+    0.5            // Radius
+    open           // Remove end caps
+    texture { 
+        pigment{
+            rgb <0,1,1> 
+            }
+        }
+}
+
 box{
     <-1,0,-1> //smallest?
     <1,0.5,3> //biggest

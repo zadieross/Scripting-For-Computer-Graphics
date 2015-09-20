@@ -224,8 +224,17 @@ light_source{
     open              
     texture{SolidRed}
 }
+#declare HandleBottomCylinderCut = difference{
+    object{HandleBottomCylinder}
+    object{MugBaseCutout}
+}
+#declare Handle = merge{
+    object{HandleWithTop} 
+    object{HandleBottomCylinderCut}
+}
+#declare Mug = merge{
+    object{MugBody}
+    object{Handle}
+}
 
-
-object{HandleWithTop} 
-object{HandleBottomCylinder}
-object{MugBody}  
+object{Mug}  

@@ -51,8 +51,8 @@ cone{
 } 
 
 torus{ 
-    1       //outer radius
-    .2       //inner radius  
+    1       //radius of large the circle formed by the torus
+    .2       //radius of the torus itself  
     translate <-2,1,1>  
     texture{
         pigment{ 

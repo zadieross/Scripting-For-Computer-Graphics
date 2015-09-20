@@ -1,6 +1,6 @@
 //Cammera Position List
 
-#declare FrontCameraPos = <0,3,-7>;
+#declare FrontCameraPos = <0,3,-10>;
 #declare TopCameraPos = <0,10,0>;
 #declare BottomCameraPos = <0,-10,0>;
 #declare FarFrontCameraPos = <0,0,-20>;
@@ -22,6 +22,11 @@
         pigment{ 
             rgb <0,1,0>
         }
+    } 
+#declare SolidBrown =  texture{
+        pigment{ 
+            rgb <.5,.3,.1>
+        }
     }
 #declare Purple  =  texture{
         pigment{ 
@@ -32,12 +37,13 @@
         pigment{ 
             rgbf <0,1,1,.8>
             }
-        }
+        } 
+        
 //Basic scene stuff
 
 camera{
     location FrontCameraPos  
-    look_at <0,1,0>
+    look_at <0,3,0>
 } 
 
 background{
@@ -235,6 +241,48 @@ light_source{
 #declare Mug = merge{
     object{MugBody}
     object{Handle}
-}
+}  
 
-object{Mug}  
+//Charlie Brown Tree Trunk
+
+#declare TrunkBase = cylinder {
+    MugPos + <0,3.5,0>,
+    MugPos + <0,2,0>,    
+    0.15            
+    open              
+    texture{SolidBrown}
+} 
+#declare TrunkCurveTorus = torus{ 
+    1.2
+    .15        
+    texture{SolidBrown}
+}
+#declare TrunkCurveTorusCut = box{
+    <-2,-1,0>
+    <2,1,-2>
+} 
+#declare TrunkCurve = difference{
+    object{TrunkCurveTorus}
+    object{TrunkCurveTorusCut}
+}  
+#declare TrunkBaseAndCurve = merge{ 
+    object{TrunkBase}
+    object{TrunkCurve
+        rotate <-90,0,0>
+        translate MugPos + <-1.2,3.5,0>
+    }
+} 
+#declare TrunkEnd = cone{
+    MugPos + <-2.4,3.5,0>
+    .15     
+    MugPos + <-2.4,1.5,0> 
+    .05 
+    texture{SolidBrown}
+}
+#declare Trunk = merge{
+    object{TrunkEnd}
+    object{TrunkBaseAndCurve}
+}  
+  
+object{Trunk}  
+object{Mug}

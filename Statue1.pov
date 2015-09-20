@@ -32,7 +32,12 @@
         pigment{ 
             rgb <0.3,0,1>
         }
-    } 
+    }
+#declare Silver  =  texture{
+        pigment{ 
+            rgb <1,.9,1>
+        }
+    }  
 #declare SeeThroughGreen =  texture{
         pigment{ 
             rgbf <0,1,1,.8>
@@ -282,7 +287,29 @@ light_source{
 #declare Trunk = merge{
     object{TrunkEnd}
     object{TrunkBaseAndCurve}
-}  
-  
+}
+
+// Ornament
+
+#declare OrnamentSphere = sphere{
+    MugPos + <-2.4,.8,0>
+    .5
+    texture{SolidRed} 
+}
+#declare OrnamentTop =  cylinder {
+    MugPos + <-2.4,1.4,0>
+    MugPos + <-2.4,1.2,0>    
+    0.25            
+    open              
+    texture{Silver}
+} 
+#declare OrnamentBody = merge{
+    object{OrnamentTop}
+    object{OrnamentSphere}
+}
+
+
+
+object{OrnamentBody}  
 object{Trunk}  
 object{Mug}

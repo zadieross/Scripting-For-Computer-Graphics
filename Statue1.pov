@@ -1,6 +1,6 @@
 //Cammera Position List
 
-#declare FrontCameraPos = <2,3,-10>;
+#declare FrontCameraPos = <0,3,-7>;
 #declare TopCameraPos = <0,10,0>;
 #declare BottomCameraPos = <0,-10,0>;
 #declare FarFrontCameraPos = <0,0,-20>;
@@ -37,7 +37,7 @@
 
 camera{
     location FrontCameraPos  
-    look_at <0,0,0>
+    look_at <0,1,0>
 } 
 
 background{
@@ -201,12 +201,31 @@ light_source{
     object{HalfHandleTorus}
     object{HandleTorusSecondCutout}
 }
-
-object{
-    HandleCurve
-    rotate <-90,0,0> 
-    translate (MugPos + <1.2,1.3,0>)
+#declare HandleLocation = <1.1,1.3,0>;
+#declare HandleTopCylinder = cylinder {
+    HandleLocation + <0,1.5,0>,
+    HandleLocation + <-1.5,1.5,0>,    
+    0.16            
+    open              
+    texture{SolidRed}
+}
+#declare HandleWithTop = merge{
+    object{
+        HandleCurve
+        rotate <-90,0,0> 
+        translate (MugPos + HandleLocation)
+    }
+    object{HandleTopCylinder} 
+}
+#declare HandleBottomCylinder = cylinder {
+    HandleLocation + <.28,.6,0>,
+    HandleLocation + <-1.5,-1.3,0>,    
+    0.16            
+    open              
+    texture{SolidRed}
 }
 
 
-object{MugBody}
+object{HandleWithTop} 
+object{HandleBottomCylinder}
+object{MugBody}  

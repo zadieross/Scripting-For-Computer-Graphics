@@ -307,9 +307,19 @@ light_source{
     object{OrnamentTop}
     object{OrnamentSphere}
 }
+#declare OrnamentTorus = torus{
+    .15
+    .04
+    texture{Silver}
+}
+#declare Ornament = merge{
+    object{OrnamentTorus
+        rotate <-90,0,0>
+        translate MugPos + <-2.4,1.4,0>
+    }
+    object{OrnamentBody}
+}
 
-
-
-object{OrnamentBody}  
+object{Ornament}  
 object{Trunk}  
 object{Mug}

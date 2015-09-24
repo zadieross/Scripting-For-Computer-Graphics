@@ -1,0 +1,13 @@
+#declare RoomWidth = 632;
+#declare RoomLength = 1016;
+#declare RoomHeight = 335;
+
+
+#declare CATLab = box{
+    <0,0,0>
+    <RoomWidth, RoomHeight, RoomLength>
+}
+#declare Windows = box{
+    <,,>
+    <,,>
+}

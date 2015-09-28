@@ -11,7 +11,7 @@
 #declare CenterCeiling = <HalfRoomWidth,RoomHeight, HalfRoomLength>;
 #declare Margret = <HalfRoomWidth,SeatedEyeHeight, 40>;
 #declare Justin = <HalfRoomWidth, SeatedEyeHeight, RoomLength>;
-#declare CouchLook = <35,25,0>;
+#declare CouchLook = <0,0,0>;
 #declare CameraPosCouchLook = CouchLook + <-150,75,75>;
 #declare CloseUpOnOrigin = <10,10,-50>;
 #declare FarLookOrigin = <10,10,-75>;
@@ -55,6 +55,7 @@
 #declare SeatBackHeight = 65;
 #declare BackCushionHeight = 38;
 #declare FrameBottomHeight = 23;
+#declare CouchFrameBackWidth = 5;
 #declare CouchTexture = texture{
         pigment{ 
             rgb <1,1,1>
@@ -134,7 +135,27 @@
 #declare CouchFrameBottom = box{
     <0,0,0>
     <BottomCushionWidth,FrameBottomHeight,2*BottomCushionLength>
+    texture{CouchTexture}
+}
+#declare CouchFrameBack = box{
+    <0,0,0>
+    <2*BottomCushionLength,SeatBackHeight,CouchFrameBackWidth>
+    texture{CouchTexture}
 }    
+
+#declare Couch = merge{
+    object{BothBottomCushions
+        translate <CouchFrameBackWidth,FrameBottomHeight,0>
+    }
+    object{CouchFrameBottom}
+    object{CouchFrameBack}
+    object{ArmRest
+        translate<-ArmRestWidth,0,0>
+    }
+    object{ArmRest
+        translate<2*BottomCushionWidth,0,0>
+    } 
+} 
 
 
 camera{
@@ -151,16 +172,11 @@ light_source{
     rgb<1,1,1>
 }
 
-    object{BothBottomCushions
-        translate <0,FrameBottomHeight,0>
-    }
-    object{ArmRest
-        translate<-ArmRestWidth,0,0>
-    }
-    object{ArmRest
-        translate<2*BottomCushionWidth,0,0>
-    } 
 
+object{
+    Couch
+    rotate <0,-90,0>
+}
 /*difference{ 
     object{
         CATLab

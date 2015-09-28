@@ -10,7 +10,12 @@
 #declare CenterSeated = <HalfRoomWidth,SeatedEyeHeight, HalfRoomLength>;
 #declare CenterCeiling = <HalfRoomWidth,RoomHeight, HalfRoomLength>;
 #declare Margret = <HalfRoomWidth,SeatedEyeHeight, 40>;
-#declare Justin = <HalfRoomWidth, SeatedEyeHeight, RoomLength>; 
+#declare Justin = <HalfRoomWidth, SeatedEyeHeight, RoomLength>;
+#declare CouchLook = <35,25,0>;
+#declare CameraPosCouchLook = CouchLook + <-150,75,75>;
+#declare CloseUpOnOrigin = <10,10,-50>;
+#declare FarLookOrigin = <10,10,-75>;
+#declare TopLookOrigin = <10, 75,0>; 
 
 #declare DoorWidth = 91;
 #declare DoorHeight = 236;
@@ -50,22 +55,111 @@
 #declare SeatBackHeight = 65;
 #declare BackCushionHeight = 38;
 #declare FrameBottomHeight = 23;
+#declare CouchTexture = texture{
+        pigment{ 
+            rgb <1,1,1>
+        }
+    }
+#declare PipingTexture = texture{
+        pigment{ 
+            rgb <1,0,0>
+        }
+    }
 
-#declare BottomCushion = box{
-    <0,0,0>
-    <BottomCushionWidth,BottomCushionHeight,BottomCushionLength>
+#declare BottomCushion = merge{ 
+    //Body
+    box{
+        <0,0,0>
+        <BottomCushionWidth,BottomCushionHeight,BottomCushionLength> 
+        texture{CouchTexture}
+    }
+    //Piping
+    box {
+        <0,BottomCushionHeight,0>
+        <.3,BottomCushionHeight+.3,BottomCushionLength>
+        texture{PipingTexture}
+    }
+    box {
+        <0,BottomCushionHeight,0>
+        <BottomCushionWidth,BottomCushionHeight+.3,.3>
+        texture{PipingTexture}
+    }
+    box {
+        <BottomCushionWidth,BottomCushionHeight,0>
+        <BottomCushionWidth,BottomCushionHeight+.3,BottomCushionLength>
+        texture{PipingTexture}
+    }
+    box {
+        <0,BottomCushionHeight,BottomCushionLength>
+        <BottomCushionWidth,BottomCushionHeight+.3,BottomCushionLength>
+        texture{PipingTexture}
+    }
 }
+#declare BothBottomCushions = merge{
+    object{BottomCushion}
+    object{
+        BottomCushion
+        translate<BottomCushionWidth,0,0>
+    }
+}
+#declare ArmRest = merge{
+    //Body
+    box {
+        <0,0,0>
+        <ArmRestWidth,ArmRestHeight,ArmRestLength>
+        texture{CouchTexture}
+    }
+    //Piping
+    box {
+        <0,ArmRestHeight,0>
+        <.3,ArmRestHeight+.3,ArmRestLength>
+        texture{PipingTexture}
+    }
+    box {
+        <0,ArmRestHeight,0>
+        <ArmRestWidth,ArmRestHeight+.3,.3>
+        texture{PipingTexture}
+    }
+    box {
+        <ArmRestWidth,ArmRestHeight,0>
+        <ArmRestWidth,ArmRestHeight+.3,ArmRestLength>
+        texture{PipingTexture}
+    }
+    box {
+        <0,ArmRestHeight,ArmRestLength>
+        <ArmRestWidth,ArmRestHeight+.3,ArmRestLength>
+        texture{PipingTexture}
+    }
+}
+#declare CouchFrameBottom = box{
+    <0,0,0>
+    <BottomCushionWidth,FrameBottomHeight,2*BottomCushionLength>
+}    
 
 
 camera{
-    location Justin
-    look_at Margret
+    location CameraPosCouchLook
+    look_at CouchLook
 }
 
 light_source{
     CenterCeiling
     rgb<1,1,1>        
-} 
+}
+light_source{
+    <0,200,0>
+    rgb<1,1,1>
+}
+
+    object{BothBottomCushions
+        translate <0,FrameBottomHeight,0>
+    }
+    object{ArmRest
+        translate<-ArmRestWidth,0,0>
+    }
+    object{ArmRest
+        translate<2*BottomCushionWidth,0,0>
+    } 
 
 /*difference{ 
     object{

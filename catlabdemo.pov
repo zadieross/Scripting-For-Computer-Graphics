@@ -46,16 +46,16 @@
     translate <0,WindowDistanceFromGround,0>
 }
 
-#declare ArmRestLength = 89;
-#declare ArmRestHeight = 49;
-#declare ArmRestWidth = 23.5;
+#declare ArmRestZ = 89;
+#declare ArmRestY = 49;
+#declare ArmRestX = 23.5;
 #declare BottomCushionX = 35;
 #declare BottomCushionZ = 27;
 #declare BottomCushionY = 15;
-#declare SeatBackHeight = 65;
-#declare BackCushionHeight = 38;
-#declare FrameBottomHeight = 23;
-#declare CouchFrameBackWidth = 5;
+#declare FrameBackY = 65;
+#declare BackCushionY = 38;
+#declare FrameBottomY = 23;
+#declare CouchFrameBackZ = 5;
 #declare CouchTexture = texture{
         pigment{ 
             rgb <1,1,1>
@@ -107,39 +107,39 @@
     //Body
     box {
         <0,0,0>
-        <ArmRestWidth,ArmRestHeight,ArmRestLength>
+        <ArmRestX,ArmRestY,ArmRestZ>
         texture{CouchTexture}
     }
     //Piping
     box {
-        <0,ArmRestHeight,0>
-        <.3,ArmRestHeight+.3,ArmRestLength>
+        <0,ArmRestY,0>
+        <.3,ArmRestY+.3,ArmRestZ>
         texture{PipingTexture}
     }
     box {
-        <0,ArmRestHeight,0>
-        <ArmRestWidth,ArmRestHeight+.3,.3>
+        <0,ArmRestY,0>
+        <ArmRestX,ArmRestY+.3,.3>
         texture{PipingTexture}
     }
     box {
-        <ArmRestWidth,ArmRestHeight,0>
-        <ArmRestWidth,ArmRestHeight+.3,ArmRestLength>
+        <ArmRestX,ArmRestY,0>
+        <ArmRestX,ArmRestY+.3,ArmRestZ>
         texture{PipingTexture}
     }
     box {
-        <0,ArmRestHeight,ArmRestLength>
-        <ArmRestWidth,ArmRestHeight+.3,ArmRestLength>
+        <0,ArmRestY,ArmRestZ>
+        <ArmRestX,ArmRestY+.3,ArmRestZ>
         texture{PipingTexture}
     }
 }
 #declare CouchFrameBottom = box{
     <0,0,0>
-    <2*BottomCushionX,FrameBottomHeight,BottomCushionZ>
+    <2*BottomCushionX,FrameBottomY,BottomCushionZ>
     texture{CouchTexture}
 }
 #declare CouchFrameBack = box{
     <0,0,0>
-    <2*BottomCushionX,SeatBackHeight,CouchFrameBackWidth>
+    <2*BottomCushionX,FrameBackY,CouchFrameBackZ>
     texture{CouchTexture}
 }
 /*#declare BackCushion = merge{
@@ -153,12 +153,12 @@
 
 #declare Couch = merge{
     object{BothBottomCushions
-        translate <0,FrameBottomHeight,CouchFrameBackWidth>
+        translate <0,FrameBottomY,CouchFrameBackZ>
     }
     object{CouchFrameBottom}
     object{CouchFrameBack}
     object{ArmRest
-        translate<-ArmRestWidth,0,0>
+        translate<-ArmRestX,0,0>
     }
     object{ArmRest
         translate<2*BottomCushionX,0,0>

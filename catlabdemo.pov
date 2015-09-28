@@ -134,18 +134,18 @@
 }
 #declare CouchFrameBottom = box{
     <0,0,0>
-    <BottomCushionWidth,FrameBottomHeight,2*BottomCushionLength>
+    <2*BottomCushionWidth,FrameBottomHeight,BottomCushionLength>
     texture{CouchTexture}
 }
 #declare CouchFrameBack = box{
     <0,0,0>
-    <2*BottomCushionLength,SeatBackHeight,CouchFrameBackWidth>
+    <2*BottomCushionWidth,SeatBackHeight,CouchFrameBackWidth>
     texture{CouchTexture}
 }    
 
 #declare Couch = merge{
     object{BothBottomCushions
-        translate <CouchFrameBackWidth,FrameBottomHeight,0>
+        translate <0,FrameBottomHeight,CouchFrameBackWidth>
     }
     object{CouchFrameBottom}
     object{CouchFrameBack}

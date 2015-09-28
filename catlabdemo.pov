@@ -49,9 +49,9 @@
 #declare ArmRestLength = 89;
 #declare ArmRestHeight = 49;
 #declare ArmRestWidth = 23.5;
-#declare BottomCushionWidth = 35;
-#declare BottomCushionLength = 27;
-#declare BottomCushionHeight = 15;
+#declare BottomCushionX = 35;
+#declare BottomCushionZ = 27;
+#declare BottomCushionY = 15;
 #declare SeatBackHeight = 65;
 #declare BackCushionHeight = 38;
 #declare FrameBottomHeight = 23;
@@ -71,28 +71,28 @@
     //Body
     box{
         <0,0,0>
-        <BottomCushionWidth,BottomCushionHeight,BottomCushionLength> 
+        <BottomCushionX,BottomCushionY,BottomCushionZ> 
         texture{CouchTexture}
     }
     //Piping
     box {
-        <0,BottomCushionHeight,0>
-        <.3,BottomCushionHeight+.3,BottomCushionLength>
+        <0,BottomCushionY,0>
+        <.3,BottomCushionY+.3,BottomCushionZ>
         texture{PipingTexture}
     }
     box {
-        <0,BottomCushionHeight,0>
-        <BottomCushionWidth,BottomCushionHeight+.3,.3>
+        <0,BottomCushionY,0>
+        <BottomCushionX,BottomCushionY+.3,.3>
         texture{PipingTexture}
     }
     box {
-        <BottomCushionWidth,BottomCushionHeight,0>
-        <BottomCushionWidth,BottomCushionHeight+.3,BottomCushionLength>
+        <BottomCushionX,BottomCushionY,0>
+        <BottomCushionX,BottomCushionY+.3,BottomCushionZ>
         texture{PipingTexture}
     }
     box {
-        <0,BottomCushionHeight,BottomCushionLength>
-        <BottomCushionWidth,BottomCushionHeight+.3,BottomCushionLength>
+        <0,BottomCushionY,BottomCushionZ>
+        <BottomCushionX,BottomCushionY+.3,BottomCushionZ>
         texture{PipingTexture}
     }
 }
@@ -100,7 +100,7 @@
     object{BottomCushion}
     object{
         BottomCushion
-        translate<BottomCushionWidth,0,0>
+        translate<BottomCushionX,0,0>
     }
 }
 #declare ArmRest = merge{
@@ -134,14 +134,22 @@
 }
 #declare CouchFrameBottom = box{
     <0,0,0>
-    <2*BottomCushionWidth,FrameBottomHeight,BottomCushionLength>
+    <2*BottomCushionX,FrameBottomHeight,BottomCushionZ>
     texture{CouchTexture}
 }
 #declare CouchFrameBack = box{
     <0,0,0>
-    <2*BottomCushionWidth,SeatBackHeight,CouchFrameBackWidth>
+    <2*BottomCushionX,SeatBackHeight,CouchFrameBackWidth>
     texture{CouchTexture}
-}    
+}
+/*#declare BackCushion = merge{
+    //Body
+    box{
+        <,,>
+        <,,>
+    }
+}*/
+    
 
 #declare Couch = merge{
     object{BothBottomCushions
@@ -153,7 +161,7 @@
         translate<-ArmRestWidth,0,0>
     }
     object{ArmRest
-        translate<2*BottomCushionWidth,0,0>
+        translate<2*BottomCushionX,0,0>
     } 
 } 
 

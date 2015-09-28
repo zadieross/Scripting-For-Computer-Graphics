@@ -54,6 +54,8 @@
 #declare BottomCushionY = 15;
 #declare FrameBackY = 65;
 #declare BackCushionY = 38;
+#declare BackCushionX = BottomCushionX;
+#declare BackCushionZ = BottomCushionY;
 #declare FrameBottomY = 23;
 #declare CouchFrameBackZ = 5;
 #declare CouchTexture = texture{
@@ -142,19 +144,27 @@
     <2*BottomCushionX,FrameBackY,CouchFrameBackZ>
     texture{CouchTexture}
 }
-/*#declare BackCushion = merge{
-    //Body
-    box{
-        <,,>
-        <,,>
+#declare BackCushion = box{
+    <0,0,0>
+    <BackCushionX,BackCushionY,BackCushionY> 
+    texture{CouchTexture}
+}
+#declare BothBackCushions = merge{
+    object{BackCushion}
+    object{
+        BackCushion
+        translate <BackCushionX,0,0>
     }
-}*/
+}
     
 
 #declare Couch = merge{
     object{BothBottomCushions
         translate <0,FrameBottomY,CouchFrameBackZ>
     }
+   /* object{BothBackCushions
+        translate<0,FrameBottomY,0>
+    } */
     object{CouchFrameBottom}
     object{CouchFrameBack}
     object{ArmRest
@@ -182,9 +192,14 @@ light_source{
 
 
 object{
-    Couch
+    BackCushion
     rotate <0,-90,0>
 }
+
+/*object{
+    Couch
+    rotate <0,-90,0>
+}*/
 /*difference{ 
     object{
         CATLab

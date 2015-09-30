@@ -69,8 +69,8 @@ background{
     ActualCameraPos
     rgb <1,1,1> * KeyLightIntensity * .5
     spotlight
-    radius 10
-    falloff 20
+    radius 5
+    falloff 15
     tightness 0
     shadowless
     rotate <0,-20,0>
@@ -79,33 +79,46 @@ background{
     ActualCameraPos
     rgb <1,1,1> * .5
     spotlight
-    radius 10
+    radius 20
     falloff 30 
     point_at<0,0,0>
     rotate <0,200,0>
     
 }
 
-//light_source{KeyLight}
+/*light_source{KeyLight}
 light_source{FillLight}
-//light_source{KeyLight}
+light_source{RimLight}
+*/
 
+//McCandless Lighting (A standard stage lighting technique)
 
-//McCandless Lighting (with a bottom light in because that's proved helpful)
-
-/*light_source{
-    <-2,6,-10>
-    rgb<1,1,1>
+#declare NegXSpotCool = light_source{
+    <-5,6,-10>
+    rgb<.8,1,1>
+}
+#declare NegXSpotWarm = light_source{
+    <-5,6,-10>
+    rgb<1,1,.8>
 }    
-light_source{
-    <2,6,-10>
-    rgb<1,1,1>        
-} 
-   
-light_source{
+#declare PosXSpotCool = light_source{
+    <5,6,-10>
+    rgb<.8,1,1>        
+}
+#declare PosXSpotWarm = light_source{
+    <5,6,-10>
+    rgb<1,1,.8>        
+}
+
+light_source{NegXSpotCool}
+light_source{PosXSpotWarm}
+
+// Other generally useful lights for modeling
+    
+#declare BottomLight = light_source{
     <0,-10,0>
     rgb<1,1,1>        
-}  */  
+}    
   
 //All object positions are relative to the position of the mug base sphere
   

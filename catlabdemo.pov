@@ -46,6 +46,9 @@
     translate <0,WindowDistanceFromGround,0>
 }
 
+
+//Couch starts here
+
 #declare ArmRestZ = 89/1.5;
 #declare ArmRestY = 49;
 #declare ArmRestX = 23.5;
@@ -156,8 +159,6 @@
         translate <BackCushionX,0,0>
     }
 }
-    
-
 #declare Couch = merge{
     object{BothBottomCushions
         translate <0,FrameBottomY,CouchFrameBackZ+BackCushionZ>

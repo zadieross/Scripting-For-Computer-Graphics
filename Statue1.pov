@@ -45,19 +45,55 @@
         } 
         
 //Basic scene stuff
-
+#declare ActualCameraPos = FrontCameraPos;
 camera{
-    location FrontCameraPos  
+    location ActualCameraPos  
     look_at <0,3,0>
 } 
 
 background{
      rgb <0.3,0,1>
-}             
+} 
+
+//Lighting Options
+
+// 3 point attempt
+
+#declare KeyLightIntensity = .9;
+#declare KeyLight = light_source{
+    ActualCameraPos
+    rgb <1,1,1> * KeyLightIntensity
+    rotate <20,20,0>
+}            
+#declare FillLight = light_source{
+    ActualCameraPos
+    rgb <1,1,1> * KeyLightIntensity * .5
+    spotlight
+    radius 10
+    falloff 20
+    tightness 0
+    shadowless
+    rotate <0,-20,0>
+}            
+#declare RimLight = light_source{
+    ActualCameraPos
+    rgb <1,1,1> * .5
+    spotlight
+    radius 10
+    falloff 30 
+    point_at<0,0,0>
+    rotate <0,200,0>
+    
+}
+
+//light_source{KeyLight}
+light_source{FillLight}
+//light_source{KeyLight}
+
 
 //McCandless Lighting (with a bottom light in because that's proved helpful)
 
-light_source{
+/*light_source{
     <-2,6,-10>
     rgb<1,1,1>
 }    
@@ -66,7 +102,7 @@ light_source{
     rgb<1,1,1>        
 } 
    
-/*light_source{
+light_source{
     <0,-10,0>
     rgb<1,1,1>        
 }  */  
@@ -102,12 +138,29 @@ light_source{
     MugPos + <1,.58,1>
     MugPos + <-1,2,-1>
     texture{SeeThroughGreen}
-}   
+} 
+    //spheres  
 #declare MugNegXTopCutout  =   sphere{
     MugPos + <-2.5,1.2,0>
     2
     texture{SolidRed}
-}                 
+}                  
+#declare MugPosXTopCutout  =   sphere{
+    MugPos + <2.5,1.2,0>
+    2
+    texture{SolidRed}
+}
+#declare MugPosZTopCutout = sphere{
+    MugPos + <0,1.2,2.4>
+    2
+    texture{SolidRed}
+}
+#declare MugNegZTopCutout = sphere{
+    MugPos + <0,1.2,-2.4>
+    2
+    texture{SolidRed}
+} 
+    //cuts
 #declare MugTopWithNegXCut = difference{    
     object {
         MugTopBox
@@ -115,30 +168,16 @@ light_source{
     object{
         MugNegXTopCutout
     }
-} 
-#declare MugPosXTopCutout  =   sphere{
-    MugPos + <2.5,1.2,0>
-    2
-    texture{SolidRed}
-}  
+}   
 #declare MugTopWithXCut = difference{
     object{MugTopWithNegXCut}
     object{MugPosXTopCutout}
 }
-#declare MugPosZTopCutout = sphere{
-    MugPos + <0,1.2,2.4>
-    2
-    texture{SolidRed}
-} 
 #declare MugTopWithXPosZCut = difference{
     object{MugTopWithXCut}
     object{MugPosZTopCutout}
 }
-#declare MugNegZTopCutout = sphere{
-    MugPos + <0,1.2,-2.4>
-    2
-    texture{SolidRed}
-}
+
 #declare MugTopWithRCuts = difference{
     object{MugTopWithXPosZCut}
     object{MugNegZTopCutout}
@@ -182,10 +221,48 @@ light_source{
     object{MugTopWithQuadIthruIIICut} 
     object{MugTopQuadIVFineCut}
 }
+
+//Alternate Base Style
+
+#declare MugBasePosXCut = difference{
+    object{MugFlatBase}
+    object{MugPosXTopCutout}
+}
+#declare MugBasePosCut = difference{
+    object{MugBasePosXCut}
+    object{MugPosZTopCutout}
+}
+#declare MugBasePosPlusXCut = difference{
+    object{MugBasePosCut}    
+    object{MugNegXTopCutout}
+}
+#declare MugBaseRoughCut = difference{
+    object{MugBasePosPlusXCut}    
+    object{MugNegZTopCutout}
+}
+#declare MugBaseQuadICut = difference{
+    object{MugBaseRoughCut}
+    object{MugTopQuadIFineCut}
+}
+#declare MugBaseQuadIICut = difference{
+    object{MugBaseQuadICut}    
+    object{MugTopQuadIIFineCut}
+}
+#declare MugBaseQuadIIICut = difference{
+    object{MugBaseQuadIICut}
+    object{MugTopQuadIIIFineCut}
+}
+#declare MugCutBase = difference{
+    object{MugBaseQuadIIICut}    
+    object{MugTopQuadIVFineCut}
+}
+
+//Base Type Selection
+
 #declare MugBody = merge{
     object{MugTopWithFineCuts}
     object{MugFlatBase} 
-}   
+}       
 
 //Handle
 

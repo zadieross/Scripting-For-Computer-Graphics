@@ -430,41 +430,13 @@
 #declare Margaret = <HalfRoomWidth, SeatedEyeHeight, 40>;
 #declare Justin = <HalfRoomWidth,SeatedEyeHeight,RoomLength-40>;
 camera {
-	location Justin
+	location Justin//<RoomWidth*2, RoomHeight*2,-RoomLength>
 	look_at <HalfRoomWidth,SeatedEyeHeight,HalfRoomLength>
 }
 background { rgb <0,1,1> }
-#declare SunLight = light_source {
-	<RoomWidth*2, RoomHeight*2,-RoomLength/2>
-	rgb <.8,.8,.75> 
-	parallel 
-	point_at <HalfRoomWidth,SeatedEyeHeight,HalfRoomLength>
-}
-#declare NumSkyLights = 3;
-#declare SkyLightPos = array[NumSkyLights]{<RoomWidth/2, RoomHeight*2,-RoomLength>,
-    <0, RoomHeight*2,-RoomLength>
-    <0, RoomHeight,-RoomLength>
-    }
-#declare SkyLights = union{ 
-    #declare Index = 0;
-    #while (Index<NumSkyLights)
-    light_source {
-    	SkyLightPos[Index]
-    	rgb <.75,.75,.8> * .4 
-    	parallel 
-	    point_at <HalfRoomWidth,SeatedEyeHeight,HalfRoomLength>
-    }
-    #declare Index = Index+ 1;
-    #end
-}     
-
-light_source{SunLight} 
-light_source{SkyLights}
-
-plane {
-    <0,1,0>
-    0
-    texture{FloorTexture}
+light_source {
+	<HalfRoomWidth,SeatedEyeHeight,HalfRoomLength>
+	rgb <1,1,1>
 }
 
 object { 

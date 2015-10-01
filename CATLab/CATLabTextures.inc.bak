@@ -10,13 +10,6 @@
 #declare White = texture{pigment{rgb<1,1,1>}};
 #declare Brown = texture{pigment{rgb<.3,.1,0>}};
 
-//Floor
-#declare FloorTexture = texture{
-    pigment{
-        rgb <.2,1,.2>
-    }
-}    
-
 //Couch
 #declare CouchTexture = texture{
         pigment{ 
@@ -34,10 +27,6 @@
 	pigment { 
             rgb <0,0,0>
       }
-    finish{ 
-        ambient 0 
-        diffuse .5
-    }  
 }
 
 //Table

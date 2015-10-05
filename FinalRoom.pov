@@ -3,35 +3,57 @@
 //1 unit = 1 cm
 #declare Foot = 30.5; //I am aware that setting to cm & using this but cm is better at small items 
 
-#declare RoomWidth = Foot * 10;
-#declare RoomLength = Foot * 12;
+#declare RoomWidth = Foot * 20;
+#declare RoomLength = Foot * 20;
 #declare RoomHeight = Foot * 10;
 
 #declare HalfRoomWidth = RoomWidth/2;
 #declare HalfRoomLength = RoomLength/2;
+#declare HalfRoomHeight = RoomHeight/2;
 #declare BedHeight = Foot * 3;
-#declare SeatedOnBedHeight = BedHeight + (Foot * 2);
+#declare SeatedOnBedHeight = BedHeight + (Foot * 1.5);
 #declare StandingEyeHeight = Foot * 5;
 
 #declare Room = box {
     <0,0,0>
     <RoomWidth, RoomHeight, RoomLength>
-}
+    texture{
+            WallTexture
+        }
+}; 
 
-//Camera
+#declare RoomTiltBox = box{
+    <0,0,-1>
+    <HalfRoomWidth,RoomHeight, RoomLength+10>
+    rotate <0,0,60>
+    translate <0, HalfRoomHeight, 0>
+    texture{
+        pigment{
+            rgb<1,1,1>
+        }
+    }
+};
 
-#declare CenterCameraPos = <HalfRoomWidth, StandingEyeHeight, HalfRoomLength>;
+object{RoomTiltBox}
+
+//Camera & some other useful locations
+
+#declare RoomCenter = <HalfRoomWidth, StandingEyeHeight, HalfRoomLength>;
 #declare ZadieBedCameraPos = <RoomWidth-Foot, SeatedOnBedHeight, Foot>;
 #declare FionaBedCameraPos = <Foot, SeatedOnBedHeight, RoomLength-Foot>;
+#declare Origin = <0,0,0>; 
+
+#declare FarTopLook = <HalfRoomWidth,RoomHeight*2,-RoomLength*1.5>;
+#declare FarBottomLook = <HalfRoomWidth,RoomHeight*2,RoomLength*2>; 
 
 #declare RightWallLook = <RoomWidth, StandingEyeHeight, HalfRoomLength>;
 #declare LeftWallLook = <0, StandingEyeHeight, HalfRoomLength>;
 #declare TopWallLook = <HalfRoomWidth, StandingEyeHeight, RoomLength>;
-#declare TopWallLook = <HalfRoomWidth, StandingEyeHeight, 0>;
+#declare BottomWallLook = <HalfRoomWidth, StandingEyeHeight, 0>;
 
 camera{
-    location FionaBedCameraPos
-    look_at RightWallLook
+    location FarBottomLook
+    look_at RoomCenter
 }
 
 //Lights
@@ -40,25 +62,29 @@ camera{
     <RoomWidth*2, RoomHeight*2,RoomLength>
 	rgb <.8,.8,.75> 
 	parallel 
-	point_at CenterCameraPos
-}
+	point_at RoomCenter
+};
 
 light_source{Sun}
 light_source{
-    CenterCameraPos
+    RoomCenter
+    rgb<1,1,1>
+}
+light_source{
+    FarBottomLook
     rgb<1,1,1>
 }
 
 //Windows
 
-#declare WindowHeight = Foot * 3;
+#declare WindowHeight = Foot * 4;
 #declare WindowDepth = 20;
 #declare WindowWidth = Foot * 2;
 
 #declare WindowBox = box{
     <-WindowWidth/2, 0, -WindowDepth/2> 
     <WindowWidth/2, WindowHeight, WindowDepth/2>
-} 
+}; 
 
 #declare LeftWindowDistFromWall = Foot * 2;
 #declare RightWindowDistFromWall = Foot * 2;
@@ -72,12 +98,12 @@ light_source{
     WindowBox
     rotate WindowRotation
     translate  LeftWindowVector
-}  
+};  
 #declare RightWindow = object{
     WindowBox
     rotate WindowRotation
     translate RightWindowVector
-}
+};
     //Windowsills
 #declare WindowsillOverhang = 10;
 #declare WindowsillHeight = 3;
@@ -87,7 +113,7 @@ light_source{
 #declare Windowsill = box{
     <-WindowsillWidth/2, 0, -WindowsillDepth/2>
     <-WindowsillWidth/2, WindowsillHeight, -WindowsillDepth/2>
-}
+}; 
 
 #declare LeftWindowsill = object{
     Windowsill
@@ -98,19 +124,18 @@ light_source{
     Windowsill
     rotate WindowRotation
     translate RightWindowVector
-}
+};
 
 // BothWindows to be subtracted from Room. Windowsills are objects to be called into the room   
 
 #declare BothWindows = union{
     object{LeftWindow}
     object{RightWindow}
-}
+};
 #declare BothWindowsills = union{
     object{LeftWindowsill}
     object{RightWindowsill}
-}  
-
+};  
 
 
 difference{
@@ -120,10 +145,8 @@ difference{
     }
     object{
         Room
-        texture{
-            WallTexture
-        }
     }
+    //object{RoomTiltBox}
     object{
         BothWindows
     }

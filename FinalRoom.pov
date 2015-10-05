@@ -120,6 +120,9 @@ difference{
     }
     object{
         Room
+        texture{
+            WallTexture
+        }
     }
     object{
         BothWindows

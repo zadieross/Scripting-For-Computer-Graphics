@@ -1,0 +1,7 @@
+#include "FinalRoomTextures"
+
+//1 unit = 1 cm
+
+#declare RoomWidth = 631.5;
+#declare RoomLength = 1016;
+#declare RoomHeight = 335;

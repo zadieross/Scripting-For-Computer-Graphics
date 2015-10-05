@@ -1,7 +1,5 @@
 #include "FinalRoomTextures"
 
-
-
 //1 unit = 1 cm
 #declare Foot = 30.5; //I am aware that setting to cm & using this but cm is better at small items 
 
@@ -11,11 +9,44 @@
 
 #declare HalfRoomWidth = RoomWidth/2;
 #declare HalfRoomLength = RoomLength/2;
-#declare SeatedEyeHeight = 112;
+#declare BedHeight = Foot * 3;
+#declare SeatedOnBedHeight = BedHeight + (Foot * 2);
+#declare StandingEyeHeight = Foot * 5;
 
 #declare Room = box {
     <0,0,0>
     <RoomWidth, RoomHeight, RoomLength>
+}
+
+//Camera
+
+#declare CenterCameraPos = <HalfRoomWidth, StandingEyeHeight, HalfRoomLength>;
+#declare ZadieBedCameraPos = <RoomWidth-Foot, SeatedOnBedHeight, Foot>;
+#declare FionaBedCameraPos = <Foot, SeatedOnBedHeight, RoomLength-Foot>;
+
+#declare RightWallLook = <RoomWidth, StandingEyeHeight, HalfRoomLength>;
+#declare LeftWallLook = <0, StandingEyeHeight, HalfRoomLength>;
+#declare TopWallLook = <HalfRoomWidth, StandingEyeHeight, RoomLength>;
+#declare TopWallLook = <HalfRoomWidth, StandingEyeHeight, 0>;
+
+camera{
+    location FionaBedCameraPos
+    look_at RightWallLook
+}
+
+//Lights
+
+#declare Sun = light_source{
+    <RoomWidth*2, RoomHeight*2,RoomLength>
+	rgb <.8,.8,.75> 
+	parallel 
+	point_at CenterCameraPos
+}
+
+light_source{Sun}
+light_source{
+    CenterCameraPos
+    rgb<1,1,1>
 }
 
 //Windows
@@ -35,7 +66,7 @@
 
 #declare WindowRotation = <0,90,0>; 
 #declare LeftWindowVector = <RoomWidth, WindowDistFromFloor, RoomLength-LeftWindowDistFromWall>;
-#declare RighttWindowVector = <RoomWidth, WindowDistFromFloor, RightWindowDistFromWall>;
+#declare RightWindowVector = <RoomWidth, WindowDistFromFloor, RightWindowDistFromWall>;
 
 #declare LeftWindow = object{
     WindowBox
@@ -78,4 +109,20 @@
 #declare BothWindowsills = union{
     object{LeftWindowsill}
     object{RightWindowsill}
+}  
+
+
+
+difference{
+    object{
+        Room
+        scale 1.01
+    }
+    object{
+        Room
+    }
+    object{
+        BothWindows
+    }
 }
+object{BothWindowsills}

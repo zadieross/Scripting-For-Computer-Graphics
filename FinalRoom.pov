@@ -4,7 +4,7 @@
 #declare Foot = 30.5; //I am aware that setting to cm & using this but cm is better at small items 
 
 #declare RoomWidth = Foot * 20;
-#declare RoomLength = Foot * 20;
+#declare RoomLength = 420;
 #declare RoomHeight = Foot * 10;
 
 #declare HalfRoomWidth = RoomWidth/2;
@@ -22,11 +22,13 @@
         }
 }; 
 
+#declare RoomTiltDistFromRight = Foot *1.5;
+
 #declare RoomTiltBox = box{
     <0,0,-1>
     <HalfRoomWidth,RoomHeight, RoomLength+10>
-    rotate <0,0,60>
-    translate <0, HalfRoomHeight, 0>
+    rotate <0,0,40>                                                      
+    translate <RoomWidth,HalfRoomHeight,0>
     texture{
         pigment{
             rgb<1,1,1>
@@ -39,12 +41,12 @@ object{RoomTiltBox}
 //Camera & some other useful locations
 
 #declare RoomCenter = <HalfRoomWidth, StandingEyeHeight, HalfRoomLength>;
-#declare ZadieBedCameraPos = <RoomWidth-Foot, SeatedOnBedHeight, Foot>;
-#declare FionaBedCameraPos = <Foot, SeatedOnBedHeight, RoomLength-Foot>;
+#declare ZadieBed = <RoomWidth-Foot, SeatedOnBedHeight, Foot>;
+#declare FionaBed = <Foot, SeatedOnBedHeight, RoomLength-Foot>;
 #declare Origin = <0,0,0>; 
 
-#declare FarTopLook = <HalfRoomWidth,RoomHeight*2,-RoomLength*1.5>;
-#declare FarBottomLook = <HalfRoomWidth,RoomHeight*2,RoomLength*2>; 
+#declare FarBottomLook = <HalfRoomWidth,RoomHeight*2,-RoomLength*1.5>;
+#declare FarTopLook = <HalfRoomWidth,RoomHeight*2,RoomLength*2>; 
 
 #declare RightWallLook = <RoomWidth, StandingEyeHeight, HalfRoomLength>;
 #declare LeftWallLook = <0, StandingEyeHeight, HalfRoomLength>;
@@ -52,8 +54,8 @@ object{RoomTiltBox}
 #declare BottomWallLook = <HalfRoomWidth, StandingEyeHeight, 0>;
 
 camera{
-    location FarBottomLook
-    look_at RoomCenter
+    location FionaBed
+    look_at ZadieBed
 }
 
 //Lights

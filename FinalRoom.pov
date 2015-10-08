@@ -30,13 +30,11 @@
     rotate <0,0,40>                                                      
     translate <RoomWidth,HalfRoomHeight,0>
     texture{
-        pigment{
-            rgb<1,1,1>
-        }
+        WallTexture
     }
 };
 
-object{RoomTiltBox}
+
 
 //Camera & some other useful locations
 
@@ -77,10 +75,14 @@ light_source{
     rgb<1,1,1>
 }
 
+background{
+     rgb <0.3,0,1>
+}
+
 //Windows
 
 #declare WindowHeight = Foot * 4;
-#declare WindowDepth = 20;
+#declare WindowDepth = 200;
 #declare WindowWidth = Foot * 2;
 
 #declare WindowBox = box{
@@ -138,19 +140,28 @@ light_source{
     object{LeftWindowsill}
     object{RightWindowsill}
 };  
-
-
-difference{
-    object{
-        Room
-        scale 1.01
-    }
-    object{
-        Room
-    }
-    //object{RoomTiltBox}
-    object{
-        BothWindows
+  
+  
+merge{
+    difference{
+        object{
+            Room
+            scale 1.01
+        }
+        object{
+            Room
+        }
+        object{
+            BothWindows
+        }
+    }       
+    difference{
+        object{
+            RoomTiltBox    
+        }
+        object{
+            BothWindows
+        }
     }
 }
 object{BothWindowsills}

@@ -14,7 +14,7 @@
 #declare SeatedOnBedHeight = BedHeight + (Foot * 1.5);
 #declare StandingEyeHeight = Foot * 5;
 
-#declare Room = box {
+#declare RoomBox = box {
     <0,0,0>
     <RoomWidth, RoomHeight, RoomLength>
     texture{
@@ -33,6 +33,16 @@
         WallTexture
     }
 };
+
+#declare Floor = box{
+    <0,-5,0>
+    <RoomWidth, .001, RoomLength>
+    texture{
+        FloorTexture
+    }
+}
+
+object{Floor}
 
 
 
@@ -145,11 +155,11 @@ background{
 merge{
     difference{
         object{
-            Room
+            RoomBox
             scale 1.01
         }
         object{
-            Room
+            RoomBox
         }
         object{
             BothWindows

@@ -183,30 +183,17 @@
 	}
 }
 //==================================================
-#declare Pear_MappedPigment = pigment {
-    gradient <0,1,0>
-    color_map{
-        [0.0 color rgb <0.35,0.8,0>]//start/end color
-        [0.4 color rgb <.5,.9,0>]
-        [0.6 color rgb <.4,0.7,0.2>]
-        [0.8 color rgb <0.25,0.8,0>]
-        [1.0 color rgb <0.35,0.8,0>]//start/end color
-    }
-    scale 0.25 
-    turbulence 1
- }
- 
- // extra green tone <0.25,0.8,0.1> 
+#declare Pear_MappedPigment = pigment { color rgb <0.24,0.07,0.80> }
 
 #declare Pear_Finish = finish {
 	specular 0.5 //Max highlight intensity: 0 -> 1
-    roughness 0.35 //surface roughness: 0.0005 -> 1             
+      roughness 0.1 //surface roughness: 0.0005 -> 1             
 };
 
 #declare Pear_Material_ = material {
 	texture {
 		pigment { uv_mapping Pear_MappedPigment }
-		//finish { Pear_Finish }
+		finish { Pear_Finish }
 	}
 }
 //==================================================

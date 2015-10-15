@@ -155,7 +155,7 @@
 	}
 }
 //==================================================
-#declare Orange_MappedPigment = pigment { color rgb <0.14,0.62,0.82> }
+#declare Orange_MappedPigment = pigment { color rgb <.75,1,0.5> }
 
 #declare Orange_Finish = finish {
 	specular 0.5 //Max highlight intensity: 0 -> 1
@@ -169,7 +169,7 @@
 	}
 }
 //==================================================
-#declare OrangeStem_MappedPigment = pigment { color rgb <0.20,0.86,0.40> }
+#declare OrangeStem_MappedPigment = pigment { color rgb <0.85,0.75,0> }
 
 #declare OrangeStem_Finish = finish {
 	specular 0.5 //Max highlight intensity: 0 -> 1
@@ -192,8 +192,13 @@
         [0.8 color rgb <0.25,0.8,0>]
         [1.0 color rgb <0.3,0.9,0>]//start/end color
     }
-    scale 0.005 
-    turbulence 1 
+    /*hexagon
+     color rgb <0.3,0.9,0>
+     color rgb <0.25,0.8,0>
+     color rgb <.4,0.7,0>*/
+    scale 0.7
+    turbulence 1
+    
  }
  
  // extra green tone <0.25,0.8,0.1> 
@@ -206,10 +211,12 @@
 #declare Pear_Material_ = material {
 	texture {
 		pigment { uv_mapping Pear_MappedPigment }
-		//finish { Pear_Finish }
+		//finish { Pear_Finish } 
 		normal{
-            wrinkles 1
-        }
+            bumps .7
+            //wrinkles 1
+        } 
+		
 	}
 }
 //==================================================

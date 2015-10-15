@@ -213,11 +213,11 @@
 	}
 }
 //==================================================
-#declare LeftGrapeStems_MappedPigment = pigment { color rgb <0.01,0.93,0.25> }
+#declare LeftGrapeStems_MappedPigment = pigment { color rgb <.8,1,0.5> }
 
 #declare LeftGrapeStems_Finish = finish {
-	specular 0.5 //Max highlight intensity: 0 -> 1
-      roughness 0.1 //surface roughness: 0.0005 -> 1             
+	specular 0.1 //Max highlight intensity: 0 -> 1
+      roughness 0.8 //surface roughness: 0.0005 -> 1             
 };
 
 #declare LeftGrapeStems_Material_ = material {
@@ -227,11 +227,11 @@
 	}
 }
 //==================================================
-#declare LeftGrapes_MappedPigment = pigment { color rgb <0.63,0.98,0.66> }
+#declare LeftGrapes_MappedPigment = pigment { color rgb <.8,1,0.2> }   
 
 #declare LeftGrapes_Finish = finish {
-	specular 0.5 //Max highlight intensity: 0 -> 1
-      roughness 0.1 //surface roughness: 0.0005 -> 1             
+	specular 0.25 //Max highlight intensity: 0 -> 1
+      roughness 0.3 //surface roughness: 0.0005 -> 1             
 };
 
 #declare LeftGrapes_Material_ = material {
@@ -255,7 +255,7 @@
 	}
 }
 //==================================================
-#declare RightGrapes_MappedPigment = pigment { color rgb <0.98,0.77,0.37> }
+#declare RightGrapes_MappedPigment = pigment { color rgb <0.45,0.15,0.5> }
 
 #declare RightGrapes_Finish = finish {
 	specular 0.5 //Max highlight intensity: 0 -> 1

@@ -9,8 +9,16 @@ camera {
 
 // Add Lights Here!
 light_source{
-    <0,35,-10>
-    rgb <1,1,1>
+    <-10,35,-10>
+    rgb <.8,.8,1> *.7 
+}
+light_source{
+    <10,35,-10>
+    rgb <1,.8,.8> * .75 
+}
+light_source{
+    <0,35,5>
+    rgb <1,1,1> *.3
 }
 
 object{

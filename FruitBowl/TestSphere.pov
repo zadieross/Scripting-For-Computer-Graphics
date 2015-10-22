@@ -23,5 +23,5 @@ light_source{
 sphere{
     <0,0,0>
     2
-    material{Pear_Material_}
+    pigment{Plum1_MappedPigment}
 }

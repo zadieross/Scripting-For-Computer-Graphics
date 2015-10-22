@@ -70,8 +70,25 @@
 	}
 }
 
-//==================================================
-#declare Plum1_MappedPigment = pigment { color rgb <0.12,0.00,0.69> }
+//==================================================  
+
+#declare PlumPurple = <0.45,0.027,0.35>;
+#declare PlumRed = <0.78,0,0.21>;
+
+#declare Plum1Purple = PlumPurple + <.03,0,-0.03>;
+
+#declare Plum1_MappedPigment = pigment {
+        gradient x 
+        color_map{
+                [0.0 color rgb PlumPurple]
+                [0.1 color rgb PlumPurple]
+                [0.5 color rgb PlumRed]
+                [0.9 color rgb PlumPurple]
+                [1.0 color rgb PlumPurple]
+        }
+        scale 3
+        turbulence .8
+}
 
 #declare Plum1_Finish = finish {
 	specular 0.5 //Max highlight intensity: 0 -> 1
@@ -141,7 +158,7 @@
 	}
 }
 //==================================================
-#declare Plum6_MappedPigment = pigment { color rgb <0.24,0.10,0.93> }
+#declare Plum6_MappedPigment = pigment { color rgb <0.478,0.02,0.25> }
 
 #declare Plum6_Finish = finish {
 	specular 0.5 //Max highlight intensity: 0 -> 1
@@ -155,7 +172,7 @@
 	}
 }
 //==================================================
-#declare Orange_MappedPigment = pigment { color rgb <.75,1,0.5> }
+#declare Orange_MappedPigment = pigment { color rgb <1,0.54,0>}
 
 #declare Orange_Finish = finish {
 	specular 0.5 //Max highlight intensity: 0 -> 1
@@ -169,7 +186,7 @@
 	}
 }
 //==================================================
-#declare OrangeStem_MappedPigment = pigment { color rgb <0.85,0.75,0> }
+#declare OrangeStem_MappedPigment = pigment { color rgb <1,0.7,0> }
 
 #declare OrangeStem_Finish = finish {
 	specular 0.5 //Max highlight intensity: 0 -> 1
@@ -198,7 +215,7 @@
         [0.4 color rgb PearGreen]                
         [1.0 color rgb PearYellow]     //start/end color
     }
-    scale .1
+    scale .07
     translate <0,1,0>
     turbulence 1                                                                   
     
@@ -215,19 +232,14 @@
  
 
 #declare Pear_Finish = finish {
-	specular 0.1 //Max highlight intensity: 0 -> 1
-    roughness 0.5 //surface roughness: 0.0005 -> 1             
+	specular 0.2 //Max highlight intensity: 0 -> 1
+    roughness 0.1 //surface roughness: 0.0005 -> 1             
 };
 
 #declare Pear_Material_ = material {
 	texture {
 		pigment { uv_mapping Pear_MappedPigment }
-		//finish { Pear_Finish } 
-		normal{
-            bumps .7
-            //wrinkles 1
-        } 
-		
+		finish { Pear_Finish }
 	}
 }
 //==================================================

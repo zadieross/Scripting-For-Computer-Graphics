@@ -75,10 +75,13 @@
 #declare PlumPurple = <0.45,0.027,0.35>;
 #declare PlumRed = <0.78,0,0.21>;
 #declare PlumTurbulence = .8;   // Note the range of figures added in plums 1-6 so it's never >1
-#declare PlumPatternScale = 1; 
+#declare PlumPatternScale = .5; 
 
 #declare Plum1Purple = PlumPurple + <0.03,0,-0.03>;
 #declare Plum1Red = PlumRed + <0.05,0,0>;
+
+#declare PlumSpecular = 0.3;
+#declare PlumRoughness = 0.1;
 
 #declare Plum1_MappedPigment = pigment {
         gradient x 
@@ -94,8 +97,8 @@
 }
 
 #declare Plum1_Finish = finish {
-	specular 0.5 //Max highlight intensity: 0 -> 1
-      roughness 0.1 //surface roughness: 0.0005 -> 1             
+	specular PlumSpecular
+      roughness PlumRoughness            
 };
 
 #declare Plum1_Material_ = material {
@@ -105,8 +108,8 @@
 	}
 }
 //================================================== 
-#declare Plum2Purple = PlumPurple + <0.03,0,-0.03>;
-#declare Plum2Red = PlumRed + <0.05,0,0>;
+#declare Plum2Purple = PlumPurple + <-0.05,0,0.02>;
+#declare Plum2Red = PlumRed + <-0.05,0,0>;
 
 #declare Plum2_MappedPigment = pigment {
         gradient x 
@@ -122,8 +125,8 @@
 }
 
 #declare Plum2_Finish = finish {
-	specular 0.5 //Max highlight intensity: 0 -> 1
-      roughness 0.1 //surface roughness: 0.0005 -> 1             
+	specular PlumSpecular
+      roughness PlumRoughness           
 };
 
 #declare Plum2_Material_ = material {
@@ -133,8 +136,8 @@
 	}
 }
 //================================================== 
-#declare Plum3Purple = PlumPurple + <0.03,0,-0.03>;
-#declare Plum3Red = PlumRed + <0.05,0,0>;
+#declare Plum3Purple = PlumPurple + <0.07,0,0.01>;
+#declare Plum3Red = PlumRed + <0.09,0,0>;
 
 #declare Plum3_MappedPigment = pigment {
         gradient x 
@@ -150,8 +153,8 @@
 }
 
 #declare Plum3_Finish = finish {
-	specular 0.5 //Max highlight intensity: 0 -> 1
-      roughness 0.1 //surface roughness: 0.0005 -> 1             
+	specular PlumSpecular
+      roughness PlumRoughness            
 };
 
 #declare Plum3_Material_ = material {
@@ -178,8 +181,8 @@
 }
 
 #declare Plum4_Finish = finish {
-	specular 0.5 //Max highlight intensity: 0 -> 1
-      roughness 0.1 //surface roughness: 0.0005 -> 1             
+	specular PlumSpecular
+      roughness PlumRoughness             
 };
 
 #declare Plum4_Material_ = material {
@@ -206,8 +209,8 @@
 }
 
 #declare Plum5_Finish = finish {
-	specular 0.5 //Max highlight intensity: 0 -> 1
-      roughness 0.1 //surface roughness: 0.0005 -> 1             
+	specular PlumSpecular
+      roughness PlumRoughness             
 };
 
 #declare Plum5_Material_ = material {
@@ -234,8 +237,8 @@
 }
 
 #declare Plum6_Finish = finish {
-	specular 0.5 //Max highlight intensity: 0 -> 1
-      roughness 0.1 //surface roughness: 0.0005 -> 1             
+	specular PlumSpecular
+      roughness PlumRoughness            
 };
 
 #declare Plum6_Material_ = material {
@@ -338,17 +341,29 @@
 };
 
 #declare LeftGrapes_Material_ = material {
-	texture {
+	texture {                                                       
 		pigment { uv_mapping LeftGrapes_MappedPigment }
 		finish { LeftGrapes_Finish }
 	}
 }
 //==================================================
-#declare Apple_MappedPigment = pigment { color rgb <0.94,0.05,0.20> }
+//I'm doing a Gala apple, or at least trying to
+#declare AppleLightColor = <0.98, 0.807, 0.235>;
+#declare AppleDarkColor = <0.98, 0.235, 0.235>;
+
+#declare Apple_MappedPigment = pigment {
+        gradient x
+        pigment_map{
+                [0.0 color rgb AppleLightColor]
+                [0.3 color rgb AppleLightColor]
+                [0.6 color rgb AppleDarkColor]
+                [1.0 color rgb AppleLightColor]
+        } 
+}
 
 #declare Apple_Finish = finish {
-	specular 0.5 //Max highlight intensity: 0 -> 1
-      roughness 0.1 //surface roughness: 0.0005 -> 1             
+	specular 0.3 //Max highlight intensity: 0 -> 1
+      roughness 0.01 //surface roughness: 0.0005 -> 1             
 };
 
 #declare Apple_Material_ = material {

@@ -23,5 +23,5 @@ light_source{
 sphere{
     <0,0,0>
     2
-    pigment{Plum1_MappedPigment}
+    material{Apple_Material_}
 }

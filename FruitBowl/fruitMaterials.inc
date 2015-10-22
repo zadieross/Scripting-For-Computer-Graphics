@@ -187,21 +187,20 @@
         color rgb <0.584,0.345,0>
 }
 
+#declare PearYellow = <.886,.988,0.384>;
+#declare PearWhite = <0.87,0.98,0.61>;
+#declare PearGreen = <0.584,0.93,0.06>;
+
 #declare PearBodyPigment = pigment {
-    gradient <0,1,0>
+    leopard
     color_map{
-        [0.0 color rgb <0.584,0.93,0.06>]//start/end color
-        [0.4 color rgb <.4,.9,0>]
-        [0.6 color rgb <.4,0.7,0>]
-        [0.8 color rgb <0.25,0.8,0>]
-        [1.0 color rgb <0.3,0.9,0>]//start/end color
+        [0.0 color rgb PearYellow]     //start/end color
+        [0.4 color rgb PearGreen]                
+        [1.0 color rgb PearYellow]     //start/end color
     }
-    /*hexagon
-     color rgb <0.3,0.9,0>
-     color rgb <0.25,0.8,0>
-     color rgb <.4,0.7,0>*/
-    scale 0.7
-    //turbulence 1
+    scale .1
+    translate <0,1,0>
+    turbulence 1                                                                   
     
  }
 #declare Pear_MappedPigment =  pigment{
@@ -214,7 +213,6 @@
         }     
 }
  
- // extra green tone <0.25,0.8,0.1> 
 
 #declare Pear_Finish = finish {
 	specular 0.1 //Max highlight intensity: 0 -> 1

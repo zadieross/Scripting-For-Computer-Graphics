@@ -74,20 +74,23 @@
 
 #declare PlumPurple = <0.45,0.027,0.35>;
 #declare PlumRed = <0.78,0,0.21>;
+#declare PlumTurbulence = .8;   // Note the range of figures added in plums 1-6 so it's never >1
+#declare PlumPatternScale = 1; 
 
-#declare Plum1Purple = PlumPurple + <.03,0,-0.03>;
+#declare Plum1Purple = PlumPurple + <0.03,0,-0.03>;
+#declare Plum1Red = PlumRed + <0.05,0,0>;
 
 #declare Plum1_MappedPigment = pigment {
         gradient x 
         color_map{
-                [0.0 color rgb PlumPurple]
-                [0.1 color rgb PlumPurple]
-                [0.5 color rgb PlumRed]
-                [0.9 color rgb PlumPurple]
-                [1.0 color rgb PlumPurple]
+                [0.0 color rgb Plum1Purple]
+                [0.1 color rgb Plum1Purple]
+                [0.5 color rgb Plum1Red]
+                [0.9 color rgb Plum1Purple]
+                [1.0 color rgb Plum1Purple]
         }
-        scale 3
-        turbulence .8
+        scale PlumPatternScale
+        turbulence PlumTurbulence
 }
 
 #declare Plum1_Finish = finish {
@@ -101,8 +104,22 @@
 		finish { Plum1_Finish }
 	}
 }
-//==================================================
-#declare Plum2_MappedPigment = pigment { color rgb <0.62,0.17,0.42> }
+//================================================== 
+#declare Plum2Purple = PlumPurple + <0.03,0,-0.03>;
+#declare Plum2Red = PlumRed + <0.05,0,0>;
+
+#declare Plum2_MappedPigment = pigment {
+        gradient x 
+        color_map{
+                [0.0 color rgb Plum2Purple]
+                [0.1 color rgb Plum2Purple]
+                [0.5 color rgb Plum2Red]
+                [0.9 color rgb Plum2Purple]
+                [1.0 color rgb Plum2Purple]
+        }
+        scale PlumPatternScale
+        turbulence PlumTurbulence
+}
 
 #declare Plum2_Finish = finish {
 	specular 0.5 //Max highlight intensity: 0 -> 1
@@ -115,8 +132,22 @@
 		finish { Plum2_Finish }
 	}
 }
-//==================================================
-#declare Plum3_MappedPigment = pigment { color rgb <0.24,0.96,0.86> }
+//================================================== 
+#declare Plum3Purple = PlumPurple + <0.03,0,-0.03>;
+#declare Plum3Red = PlumRed + <0.05,0,0>;
+
+#declare Plum3_MappedPigment = pigment {
+        gradient x 
+        color_map{
+                [0.0 color rgb Plum3Purple]
+                [0.1 color rgb Plum3Purple]
+                [0.5 color rgb Plum3Red]
+                [0.9 color rgb Plum3Purple]
+                [1.0 color rgb Plum3Purple]
+        }
+        scale PlumPatternScale
+        turbulence PlumTurbulence
+}
 
 #declare Plum3_Finish = finish {
 	specular 0.5 //Max highlight intensity: 0 -> 1
@@ -129,8 +160,22 @@
 		finish { Plum3_Finish }
 	}
 }
-//==================================================
-#declare Plum4_MappedPigment = pigment { color rgb <0.20,0.64,0.04> }
+//================================================== 
+#declare Plum4Purple = PlumPurple + <0.03,0,-0.03>;
+#declare Plum4Red = PlumRed + <0.05,0,0>;
+
+#declare Plum4_MappedPigment = pigment {
+        gradient x 
+        color_map{
+                [0.0 color rgb Plum4Purple]
+                [0.1 color rgb Plum4Purple]
+                [0.5 color rgb Plum4Red]
+                [0.9 color rgb Plum4Purple]
+                [1.0 color rgb Plum4Purple]
+        }
+        scale PlumPatternScale
+        turbulence PlumTurbulence
+}
 
 #declare Plum4_Finish = finish {
 	specular 0.5 //Max highlight intensity: 0 -> 1
@@ -143,8 +188,22 @@
 		finish { Plum4_Finish }
 	}
 }
-//==================================================
-#declare Plum5_MappedPigment = pigment { color rgb <0.06,0.88,0.77> }
+//================================================== 
+#declare Plum5Purple = PlumPurple + <0.03,0,-0.03>;
+#declare Plum5Red = PlumRed + <0.05,0,0>;
+
+#declare Plum5_MappedPigment = pigment {
+        gradient x 
+        color_map{
+                [0.0 color rgb Plum5Purple]
+                [0.1 color rgb Plum5Purple]
+                [0.5 color rgb Plum5Red]
+                [0.9 color rgb Plum5Purple]
+                [1.0 color rgb Plum5Purple]
+        }
+        scale PlumPatternScale
+        turbulence PlumTurbulence
+}
 
 #declare Plum5_Finish = finish {
 	specular 0.5 //Max highlight intensity: 0 -> 1
@@ -157,8 +216,22 @@
 		finish { Plum5_Finish }
 	}
 }
-//==================================================
-#declare Plum6_MappedPigment = pigment { color rgb <0.478,0.02,0.25> }
+//================================================== 
+#declare Plum6Purple = PlumPurple + <0.03,0,-0.03>;
+#declare Plum6Red = PlumRed + <0.05,0,0>;
+
+#declare Plum6_MappedPigment = pigment {
+        gradient x 
+        color_map{
+                [0.0 color rgb Plum6Purple]
+                [0.1 color rgb Plum6Purple]
+                [0.5 color rgb Plum6Red]
+                [0.9 color rgb Plum6Purple]
+                [1.0 color rgb Plum6Purple]
+        }
+        scale PlumPatternScale
+        turbulence PlumTurbulence
+}
 
 #declare Plum6_Finish = finish {
 	specular 0.5 //Max highlight intensity: 0 -> 1

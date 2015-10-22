@@ -183,10 +183,14 @@
 	}
 }
 //==================================================
-#declare Pear_MappedPigment = pigment {
+#declare PearStemPigment = pigment{
+        color rgb <0.584,0.345,0>
+}
+
+#declare PearBodyPigment = pigment {
     gradient <0,1,0>
     color_map{
-        [0.0 color rgb <0.3,0.9,0>]//start/end color
+        [0.0 color rgb <0.584,0.93,0.06>]//start/end color
         [0.4 color rgb <.4,.9,0>]
         [0.6 color rgb <.4,0.7,0>]
         [0.8 color rgb <0.25,0.8,0>]
@@ -197,9 +201,18 @@
      color rgb <0.25,0.8,0>
      color rgb <.4,0.7,0>*/
     scale 0.7
-    turbulence 1
+    //turbulence 1
     
  }
+#declare Pear_MappedPigment =  pigment{
+        gradient <0,1,0> 
+        pigment_map{
+                [ 0.0 PearBodyPigment]
+                [ 0.9 PearBodyPigment]
+                [ 0.91 PearStemPigment]
+                [ 1.0 PearStemPigment]
+        }     
+}
  
  // extra green tone <0.25,0.8,0.1> 
 

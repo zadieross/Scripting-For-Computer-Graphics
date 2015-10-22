@@ -1,5 +1,9 @@
 //==================================================
 //Material definitions
+
+#declare CherryRed = <1,0,0>;
+#declare CherryStem = <0.584,0.345,0>; 
+
 #declare Cherries1_MappedPigment = pigment { color rgb <1,0,0> };
 
 #declare Cherries1_Finish = finish {
@@ -14,7 +18,15 @@
 	}
 }
 //==================================================
-#declare Cherries2_MappedPigment = pigment { color rgb <0.59,0.44,0.58> };
+#declare Cherries2_MappedPigment = pigment { 
+        gradient y
+        pigment_map{ 
+                [0.0 color rgb CherryRed]
+                [0.45 color rgb CherryRed]
+                [0.46 color rgb CherryStem]
+                [1.0 color rgb CherryStem] 
+        }
+};
 
 #declare Cherries2_Finish = finish {
 	specular 0.5 //Max highlight intensity: 0 -> 1

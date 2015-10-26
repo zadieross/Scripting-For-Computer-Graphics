@@ -7,7 +7,6 @@ camera {
         look_at <0,0,0>  
 } 
 
-// Add Lights Here!
 light_source{
     <-10,35,-10>
     rgb <.8,.8,1> *.7 

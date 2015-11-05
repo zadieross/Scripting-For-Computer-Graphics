@@ -87,7 +87,8 @@ light_source{
 
 background{
      rgb <0.3,0,1>
-}
+} 
+
 
 //Windows
 
@@ -151,6 +152,23 @@ background{
     object{RightWindowsill}
 };  
   
+//Window cut out boxes
+
+#declare WindowCutoutDistFromCeiling = 10;
+#declare LeftWindowCutoutWidth = Foot * 3.5;
+#declare RightWindowCutoutWidth = Foot * 3.5;
+#declare WindowCutoutDepth = Foot * 3.5;
+
+#declare LeftWindowCutout = box{
+        <0,0,0>
+        <WindowCutoutDepth, RoomHeight - WindowCutoutDistFromCeiling, LeftWindowCutoutWidth>
+        texture{WallTexture}
+}
+  
+  
+  
+  
+  //objects/room actually called
   
 merge{
     difference{
@@ -164,6 +182,10 @@ merge{
         object{
             BothWindows
         }
+        object{
+                LeftWindowCutout
+                translate  <RoomWidth, 0,  RoomLength-LeftWindowDistFromWall>  
+        }   
     }       
     difference{
         object{
@@ -171,7 +193,15 @@ merge{
         }
         object{
             BothWindows
+        } 
+        object{
+            LeftWindowCutout
+            translate  <RoomWidth-WindowCutoutDepth, 0,  RoomLength-LeftWindowDistFromWall>  
         }
     }
+   object{
+        LeftWindowCutout
+        translate  <RoomWidth-10, 0,  RoomLength-LeftWindowDistFromWall>  
+    }
 }
-object{BothWindowsills}
+object{BothWindowsills}  

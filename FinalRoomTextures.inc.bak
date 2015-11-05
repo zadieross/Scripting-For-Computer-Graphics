@@ -5,7 +5,7 @@
 }
 #declare FloorTexture = texture{
     pigment{
-        rgb <0,0,0>
+        rgb <0.4,0.1,0.7>
     }
 }    
 

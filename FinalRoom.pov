@@ -1,4 +1,4 @@
-#include "FinalRoomTextures"
+#include "FinalRoomTextures"  
 
 //1 unit = 1 cm
 #declare Foot = 30.5; //I am aware that setting to cm & using this but cm is better at small items 
@@ -66,7 +66,21 @@ camera{
     look_at ZadieBed
 }
 
-//Lights
+//Lights 
+
+#include "rad_def.inc"
+
+/*#version 3.6;
+global_settings{
+        radiosity{
+                Rad_Settings (Radiosity_Default, off, off) //Type, normal?
+                pretrace_start 0.08
+                pretrace_end 0.01
+                count 500
+                nearest_count 20
+                error_bound .3  
+        }
+} */
 
 #declare Sun = light_source{
     <RoomWidth*2, RoomHeight*2,RoomLength>
@@ -165,6 +179,74 @@ background{
         texture{WallTexture}
 }
   
+// Bed
+#declare BedCylinderDiameter = 3;
+#declare BedCylinderHeight = 8;
+#declare BedPostHeight = 40;
+#declare BedPostWidth = 5;
+#declare BedPostCutoutWidth = 2;
+#declare BedPostCutoutDepth = 2.5;
+#declare BedPostCutoutDistFromEdge = (BedPostWidth-BedPostCutoutWidth)/2;
+#declare BedCrossbarHeight = 10;
+#declare BedCrossbarWidth = 3;
+#declare BedDistBetweenPosts = 30;
+#declare BedCrossbarDistFromGround1 = 20;
+#declare BedCrossbarDistFromGround2 = 40;
+
+#declare BedCylinder = cylinder{
+        <0,0,0>
+        <0, BedCylinderHeight + 2, 0>
+        BedCylinderDiameter
+        open
+        texture{BedFrameTexture}
+}
+#declare BedPostCutout = box{
+        <0,0,0>
+        <BedPostCutoutWidth, BedPostHeight, BedPostCutoutDepth>
+}
+
+#declare BedPost = difference{ 
+        merge{
+                box{  
+                        <0,0,0>
+                        <BedPostWidth, BedPostHeight, BedPostWidth>
+                }
+                object{
+                        BedCylinder
+                        translate <(BedPostWidth-BedCylinderDiameter)/2, BedPostHeight-2, (BedPostWidth-BedCylinderDiameter)/2>
+                }
+        }
+        object{
+                BedPostCutout
+                translate <BedPostCutoutDistFromEdge,0,0>
+        }
+}
+
+#declare BedCrossbar = box{
+        <0,0,0>
+        <BedDistBetweenPosts,BedCrossbarHeight, BedCrossbarWidth>
+}
+
+#declare BedHeadBoard = merge{
+        object{
+                BedPost
+        }
+        object{
+                BedPost
+                translate <BedDistBetweenPosts+BedPostWidth,0,0>
+        }
+        object{
+                BedCrossBar
+                translate <BedPostWidth,BedCrossbarDistFromGround1,(BedPostWidth-BedCrossbarWidth)/2>
+        }
+        object{
+                BedCrossBar
+                translate <BedPostWidth,BedCrossbarDistFromGround2,(BedPostWidth-BedCrossbarWidth)/2>
+        }
+}  
+
+#declare Mattress = box{
+}                          
   
   
   

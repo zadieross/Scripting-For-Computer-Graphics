@@ -40,9 +40,8 @@
     texture{
         FloorTexture
     }
-}
+};
 
-object{Floor}
 
 
 
@@ -148,7 +147,7 @@ background{
     Windowsill
     rotate WindowRotation
     translate LeftWindowVector
-}
+};
 #declare RightWindowsill = object{
     Windowsill
     rotate WindowRotation
@@ -177,7 +176,7 @@ background{
         <0,0,0>
         <WindowCutoutDepth, RoomHeight - WindowCutoutDistFromCeiling, LeftWindowCutoutWidth>
         texture{WallTexture}
-}
+};
   
 // Bed
 #declare BedCylinderDiameter = 3;
@@ -200,11 +199,11 @@ background{
         BedCylinderDiameter
         open
         texture{BedFrameTexture}
-}
+};
 #declare BedPostCutout = box{
         <0,0,0>
         <BedPostCutoutWidth, BedPostHeight, BedPostCutoutDepth>
-}
+};
 
 #declare BedPost = difference{ 
         merge{
@@ -221,12 +220,12 @@ background{
                 BedPostCutout
                 translate <BedPostCutoutDistFromEdge,0,0>
         }
-}
+};
 
 #declare BedCrossbar = box{
         <0,0,0>
         <BedDistBetweenPosts,BedCrossbarHeight, BedCrossbarWidth>
-}
+};
 
 #declare BedHeadBoard = merge{
         object{
@@ -244,12 +243,12 @@ background{
                 BedCrossbar
                 translate <BedPostWidth,BedCrossbarDistFromGround2,(BedPostWidth-BedCrossbarWidth)/2>
         }
-}  
+};  
 
 #declare Mattress = box{ 
         <0,0,0> 
         <BedDistBetweenPosts, 10, BedHeadBoardToHeadboardDist>
-} 
+}; 
                             
 
 // Bookshelf
@@ -265,23 +264,23 @@ background{
 #declare BookshelfSide = box{
         <0,0,0>
         <BookshelfThickness, BookshelfHeight, BookshelfWidth>
-}
+};
 #declare BookshelfBottom = box{
         <0,0,0>
         <BookshelfLength, BookshelfThickness, BookshelfWidth> 
-}
+};
 #declare BookshelfTop = object{
         BookshelfBottom
         translate <0, BookshelfHeight - BookshelfThickness, 0>
-}
+};
 #declare BookshelfMiddleShelf = object{
         BookshelfBottom
         translate <0, BookshelfMiddleShelfHeight, 0>
-}
+};
 #declare BookshelfBack = box{
         <0,0,0>
         <BookshelfLength, BookshelfHeight, BookshelfBackThickness> 
-}  
+};  
 #declare Bookshelf = merge{
         object{ 
                 BookshelfSide
@@ -306,7 +305,7 @@ background{
         texture{
                 BookshelfTexture
         }
-} 
+}; 
 
 // Dresser
 
@@ -323,22 +322,22 @@ background{
 #declare DresserBody = box{
         <0,0,0>
         <DresserLength,DresserHeight, DresserDepth>
-}
+};
 #declare DresserBottomDrawer = box{
         <0,0,0>
         <DresserDrawerLength, DresserBigDrawerHeight, DresserDrawerPullThickness>
         translate <DresserDrawerDistFromSides, 0, 0>
-}
+};
 #declare DresserMiddleDrawer = box{
         <0,0,0>
         <DresserDrawerLength, DresserSmallDrawerHeight, DresserDrawerPullThickness> 
         translate <DresserDrawerDistFromSides, DresserBigDrawerHeight + DresserDistBetweenDrawers, 0>
-}
+};
 #declare DresserTopDrawer = box{
         <0,0,0>
         <DresserDrawerLength, DresserSmallDrawerHeight, DresserDrawerPullThickness>
         translate <DresserDrawerDistFromSides, DresserBigDrawerHeight + (DresserDistBetweenDrawers*2) + DresserSmallDrawerHeight, 0>
-}
+};
 
 #declare Dresser = merge{
         object{
@@ -356,7 +355,17 @@ background{
         texture{
                 DresserTexture
         }
-}
+};    
+
+// Desk
+
+#declare DeskHeight = Foot * 3.5;
+#declare DeskLength = Foot * 3;
+#declare DeskWidth = Foot * 2;
+#declare DeskSideBoardWidth = 2.5;
+#declare DeskDrawersWidth = Foot;
+#declare DeskSkinnyDrawerLength = DeskLength - (DeskDrawersWidth + (DeskSideBoardWidth*3));
+ 
                  
   
   
@@ -397,4 +406,5 @@ merge{
         translate  <RoomWidth-10, 0,  RoomLength-LeftWindowDistFromWall>  
     }
 }
-object{BothWindowsills}  
+object{BothWindowsills}
+object{Floor}  

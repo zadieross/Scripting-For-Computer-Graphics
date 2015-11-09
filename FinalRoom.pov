@@ -363,8 +363,34 @@ background{
 #declare DeskLength = Foot * 3;
 #declare DeskWidth = Foot * 2;
 #declare DeskSideBoardWidth = 2.5;
-#declare DeskDrawersWidth = Foot;
+#declare DeskDrawersLength = Foot;
 #declare DeskSkinnyDrawerLength = DeskLength - (DeskDrawersWidth + (DeskSideBoardWidth*3));
+#declare DeskSkinnyDrawerHeight = 7.5; 
+#declare DeskDistBetweenDrawers = 2.5;
+#declare DeskBottomDrawerHeight = Foot * 1.5;
+#declare DeskMiddleDrawerHeight = 25;
+#declare DeskTopDrawerHeight = 25;
+
+#declare DeskSide = box{
+        <0,0,0>
+        <DeskSideBoardWidth, DeskHeight, DeskWidth>
+};
+#declare DeskSkinnyDrawer = box{
+        <0,0,0>
+        <DeskSkinnyDrawerLength, DeskSkinnyDrawerHeight, DeskWidth>
+};
+#declare DeskBottomDrawer = box{
+        <0,0,0>
+        <DeskDrawersLength, DeskBottomDrawerHeight, DeskWidth>
+};
+#declare DeskMiddleDrawer = box{
+        <0,0,0>
+        <DeskDrawersLength, DeskMiddleDrawerHeight, DeskWidth>
+};
+#declare DeskTopDrawer = box{
+        <0,0,0>
+        <DeskDrawersLength, DeskTopDrawerHeight, DeskWidth>
+};
  
                  
   

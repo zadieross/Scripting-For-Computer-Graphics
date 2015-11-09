@@ -192,6 +192,7 @@ background{
 #declare BedDistBetweenPosts = 30;
 #declare BedCrossbarDistFromGround1 = 20;
 #declare BedCrossbarDistFromGround2 = 40;
+#declare BedHeadBoardToHeadboardDist = Foot*5;
 
 #declare BedCylinder = cylinder{
         <0,0,0>
@@ -236,11 +237,11 @@ background{
                 translate <BedDistBetweenPosts+BedPostWidth,0,0>
         }
         object{
-                BedCrossBar
+                BedCrossbar
                 translate <BedPostWidth,BedCrossbarDistFromGround1,(BedPostWidth-BedCrossbarWidth)/2>
         }
         object{
-                BedCrossBar
+                BedCrossbar
                 translate <BedPostWidth,BedCrossbarDistFromGround2,(BedPostWidth-BedCrossbarWidth)/2>
         }
 }  
@@ -257,7 +258,7 @@ background{
 #declare BookshelfWidth = 25;
 #declare BookshelfLength = Foot*2;
 #declare BookshelfDepth = 24;
-#declare BookshelfBackThickness = ShelfWidth - ShelfDepth;
+#declare BookshelfBackThickness = BookshelfWidth - BookshelfDepth;
 #declare BookshelfMiddleShelfHeight = Foot *1.5;
 #declare BookshelfThickness = 2;
 
@@ -267,7 +268,7 @@ background{
 }
 #declare BookshelfBottom = box{
         <0,0,0>
-        <BookshelfLength, BookshelfThickness, BookshelfWidth>
+        <BookshelfLength, BookshelfThickness, BookshelfWidth> 
 }
 #declare BookshelfTop = object{
         BookshelfBottom
@@ -279,7 +280,7 @@ background{
 }
 #declare BookshelfBack = box{
         <0,0,0>
-        <BookshelfLength, BookshelfHeight, BookshelfBackThickness>
+        <BookshelfLength, BookshelfHeight, BookshelfBackThickness> 
 }  
 #declare Bookshelf = merge{
         object{ 
@@ -302,7 +303,61 @@ background{
         object{
                 BookshelfBottom
         }
-}                 
+        texture{
+                BookshelfTexture
+        }
+} 
+
+// Dresser
+
+#declare DresserHeight = Foot * 3.5;
+#declare DresserLength = Foot * 3;
+#declare DresserDepth = Foot * 2;
+#declare DresserBigDrawerHeight = Foot * 1.5;
+#declare DresserDistBetweenDrawers = 2;
+#declare DresserSmallDrawerHeight = Foot - DresserDistBetweenDrawers;
+#declare DresserDrawerPullThickness = 2.5;
+#declare DresserDrawerDistFromSides = 2.5;
+#declare DresserDrawerLength = DresserLength-(2*DresserDrawerDistFromSides);
+
+#declare DresserBody = box{
+        <0,0,0>
+        <DresserLength,DresserHeight, DresserDepth>
+}
+#declare DresserBottomDrawer = box{
+        <0,0,0>
+        <DresserDrawerLength, DresserBigDrawerHeight, DresserDrawerPullThickness>
+        translate <DresserDrawerDistFromSides, 0, 0>
+}
+#declare DresserMiddleDrawer = box{
+        <0,0,0>
+        <DresserDrawerLength, DresserSmallDrawerHeight, DresserDrawerPullThickness> 
+        translate <DresserDrawerDistFromSides, DresserBigDrawerHeight + DresserDistBetweenDrawers, 0>
+}
+#declare DresserTopDrawer = box{
+        <0,0,0>
+        <DresserDrawerLength, DresserSmallDrawerHeight, DresserDrawerPullThickness>
+        translate <DresserDrawerDistFromSides, DresserBigDrawerHeight + (DresserDistBetweenDrawers*2) + DresserSmallDrawerHeight, 0>
+}
+
+#declare Dresser = merge{
+        object{
+                DresserBody
+        }
+        object{
+                DresserBottomDrawer
+        }
+        object{
+                DresserMiddleDrawer
+        }
+        object{
+                DresserTopDrawer
+        }    
+        texture{
+                DresserTexture
+        }
+}
+                 
   
   
   

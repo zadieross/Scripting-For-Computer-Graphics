@@ -245,8 +245,64 @@ background{
         }
 }  
 
-#declare Mattress = box{
-}                          
+#declare Mattress = box{ 
+        <0,0,0> 
+        <BedDistBetweenPosts, 10, BedHeadBoardToHeadboardDist>
+} 
+                            
+
+// Bookshelf
+                               
+#declare BookshelfHeight = Foot*3;
+#declare BookshelfWidth = 25;
+#declare BookshelfLength = Foot*2;
+#declare BookshelfDepth = 24;
+#declare BookshelfBackThickness = ShelfWidth - ShelfDepth;
+#declare BookshelfMiddleShelfHeight = Foot *1.5;
+#declare BookshelfThickness = 2;
+
+#declare BookshelfSide = box{
+        <0,0,0>
+        <BookshelfThickness, BookshelfHeight, BookshelfWidth>
+}
+#declare BookshelfBottom = box{
+        <0,0,0>
+        <BookshelfLength, BookshelfThickness, BookshelfWidth>
+}
+#declare BookshelfTop = object{
+        BookshelfBottom
+        translate <0, BookshelfHeight - BookshelfThickness, 0>
+}
+#declare BookshelfMiddleShelf = object{
+        BookshelfBottom
+        translate <0, BookshelfMiddleShelfHeight, 0>
+}
+#declare BookshelfBack = box{
+        <0,0,0>
+        <BookshelfLength, BookshelfHeight, BookshelfBackThickness>
+}  
+#declare Bookshelf = merge{
+        object{ 
+                BookshelfSide
+        }
+        object{ 
+                BookshelfSide
+                translate <BookshelfLength - (BookshelfThickness * 2), 0, 0>
+        }
+        object{
+                BookshelfBack
+                translate <0,0,BookshelfDepth>
+        }      
+        object{ 
+                BookshelfTop 
+        }
+        object{
+                BookshelfMiddleShelf
+        }
+        object{
+                BookshelfBottom
+        }
+}                 
   
   
   

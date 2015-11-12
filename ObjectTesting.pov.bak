@@ -1,0 +1,9 @@
+camera {
+        location <0,5,-10>
+        look_at <0,0,0>  
+} 
+
+light_source{
+    <-10,35,-10>
+    rgb <1,1,1> 
+}

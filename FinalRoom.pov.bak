@@ -253,10 +253,10 @@ background{
 
 // Bookshelf
                                
-#declare BookshelfHeight = Foot*3;
-#declare BookshelfWidth = 25;
-#declare BookshelfLength = Foot*2;
-#declare BookshelfDepth = 24;
+#declare BookshelfHeight = 75.5;
+#declare BookshelfWidth = 25.25;
+#declare BookshelfLength = 76;
+#declare BookshelfDepth = 23.5;
 #declare BookshelfBackThickness = BookshelfWidth - BookshelfDepth;
 #declare BookshelfMiddleShelfHeight = Foot *1.5;
 #declare BookshelfThickness = 2;
@@ -309,14 +309,14 @@ background{
 
 // Dresser
 
-#declare DresserHeight = Foot * 3.5;
-#declare DresserLength = Foot * 3;
-#declare DresserDepth = Foot * 2;
-#declare DresserBigDrawerHeight = Foot * 1.5;
-#declare DresserDistBetweenDrawers = 2;
+#declare DresserHeight = 75.5;
+#declare DresserLength = 91;
+#declare DresserDepth = 61;
+#declare DresserBigDrawerHeight = 31;
+#declare DresserDistBetweenDrawers = 2.5;
 #declare DresserSmallDrawerHeight = Foot - DresserDistBetweenDrawers;
-#declare DresserDrawerPullThickness = 2.5;
-#declare DresserDrawerDistFromSides = 2.5;
+#declare DresserDrawerPullThickness = 2;
+#declare DresserDrawerDistFromSides = 2;
 #declare DresserDrawerLength = DresserLength-(2*DresserDrawerDistFromSides);
 
 #declare DresserBody = box{
@@ -359,11 +359,11 @@ background{
 
 // Desk
 
-#declare DeskHeight = Foot * 3.5;
-#declare DeskLength = Foot * 3;
-#declare DeskWidth = Foot * 2;
-#declare DeskSideBoardWidth = 2.5;
-#declare DeskDrawersLength = Foot;
+#declare DeskHeight = 75.5;
+#declare DeskLength = 106.5;
+#declare DeskWidth = 61;
+#declare DeskSideBoardWidth = 2;
+#declare DeskDrawersLength = 40.5;
 #declare DeskSkinnyDrawerLength = DeskLength - (DeskDrawersWidth + (DeskSideBoardWidth*3));
 #declare DeskSkinnyDrawerHeight = 7.5; 
 #declare DeskDistBetweenDrawers = 2.5;

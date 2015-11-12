@@ -1,0 +1,45 @@
+camera {
+        location <0,5,-13>
+        look_at <0,0,0>  
+} 
+
+light_source{
+    <-10,35,-10>
+    rgb <1,1,1> 
+} 
+
+#declare Leaf = mesh{
+        triangle{
+                <0,0,0>
+                <2,4,0>
+                <2,3,-1>
+                
+        }
+        triangle{
+                <0,0,0>
+                <2,4,0>
+                <2,3,1>
+        }
+        triangle{
+                <6,3,0>
+                <2,4,0>
+                <2,3,-1>
+        }
+        triangle{
+                <6,3,0>
+                <2,4,0>
+                <2,3,1>
+        }
+}  
+
+
+union{
+        #declare Index = 0;
+        #while (Index <360)
+                object{
+                        Leaf
+                        rotate <0, Index,0>
+                }
+                #declare Index = Index +30;
+        #end
+}

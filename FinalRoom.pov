@@ -258,7 +258,7 @@ background{
 #declare BookshelfLength = 76;
 #declare BookshelfDepth = 23.5;
 #declare BookshelfBackThickness = BookshelfWidth - BookshelfDepth;
-#declare BookshelfMiddleShelfHeight = Foot *1.5;
+#declare BookshelfMiddleShelfHeight = Foot *1.25;
 #declare BookshelfThickness = 2;
 
 #declare BookshelfSide = box{
@@ -281,13 +281,13 @@ background{
         <0,0,0>
         <BookshelfLength, BookshelfHeight, BookshelfBackThickness> 
 };  
-#declare Bookshelf = merge{
+#declare Bookshelf = union{
         object{ 
                 BookshelfSide
         }
         object{ 
                 BookshelfSide
-                translate <BookshelfLength - (BookshelfThickness * 2), 0, 0>
+                translate <BookshelfLength - BookshelfThickness, 0, 0>
         }
         object{
                 BookshelfBack
@@ -360,11 +360,11 @@ background{
 // Desk
 
 #declare DeskHeight = 75.5;
-#declare DeskLength = Foot * 3;
-#declare DeskWidth = Foot * 2;
-#declare DeskSideBoardWidth = 2.5;
-#declare DeskDrawersLength = Foot;
-#declare DeskSkinnyDrawerLength = DeskLength - (DeskDrawersWidth + (DeskSideBoardWidth*3));
+#declare DeskLength = 106.5;
+#declare DeskWidth = 61;
+#declare DeskSideBoardWidth = 2;
+#declare DeskDrawersLength = 40.5;
+#declare DeskSkinnyDrawerLength = DeskLength - (DeskDrawersLength + (DeskSideBoardWidth*3));
 #declare DeskSkinnyDrawerHeight = 7.5; 
 #declare DeskDistBetweenDrawers = 2.5;
 #declare DeskBottomDrawerHeight = Foot * 1.5;

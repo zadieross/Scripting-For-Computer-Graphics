@@ -253,10 +253,10 @@ background{
 
 // Bookshelf
                                
-#declare BookshelfHeight = Foot*3;
-#declare BookshelfWidth = 25;
-#declare BookshelfLength = Foot*2;
-#declare BookshelfDepth = 24;
+#declare BookshelfHeight = 75.5;
+#declare BookshelfWidth = 25.25;
+#declare BookshelfLength = 76;
+#declare BookshelfDepth = 23.5;
 #declare BookshelfBackThickness = BookshelfWidth - BookshelfDepth;
 #declare BookshelfMiddleShelfHeight = Foot *1.5;
 #declare BookshelfThickness = 2;

@@ -40,9 +40,8 @@
     texture{
         FloorTexture
     }
-}
+};
 
-object{Floor}
 
 
 
@@ -148,7 +147,7 @@ background{
     Windowsill
     rotate WindowRotation
     translate LeftWindowVector
-}
+};
 #declare RightWindowsill = object{
     Windowsill
     rotate WindowRotation
@@ -177,7 +176,7 @@ background{
         <0,0,0>
         <WindowCutoutDepth, RoomHeight - WindowCutoutDistFromCeiling, LeftWindowCutoutWidth>
         texture{WallTexture}
-}
+};
   
 // Bed
 #declare BedCylinderDiameter = 3;
@@ -192,6 +191,7 @@ background{
 #declare BedDistBetweenPosts = 30;
 #declare BedCrossbarDistFromGround1 = 20;
 #declare BedCrossbarDistFromGround2 = 40;
+#declare BedHeadBoardToHeadboardDist = Foot*5;
 
 #declare BedCylinder = cylinder{
         <0,0,0>
@@ -199,11 +199,11 @@ background{
         BedCylinderDiameter
         open
         texture{BedFrameTexture}
-}
+};
 #declare BedPostCutout = box{
         <0,0,0>
         <BedPostCutoutWidth, BedPostHeight, BedPostCutoutDepth>
-}
+};
 
 #declare BedPost = difference{ 
         merge{
@@ -220,12 +220,12 @@ background{
                 BedPostCutout
                 translate <BedPostCutoutDistFromEdge,0,0>
         }
-}
+};
 
 #declare BedCrossbar = box{
         <0,0,0>
         <BedDistBetweenPosts,BedCrossbarHeight, BedCrossbarWidth>
-}
+};
 
 #declare BedHeadBoard = merge{
         object{
@@ -236,19 +236,163 @@ background{
                 translate <BedDistBetweenPosts+BedPostWidth,0,0>
         }
         object{
-                BedCrossBar
+                BedCrossbar
                 translate <BedPostWidth,BedCrossbarDistFromGround1,(BedPostWidth-BedCrossbarWidth)/2>
         }
         object{
-                BedCrossBar
+                BedCrossbar
                 translate <BedPostWidth,BedCrossbarDistFromGround2,(BedPostWidth-BedCrossbarWidth)/2>
         }
-}  
+};  
 
 #declare Mattress = box{ 
         <0,0,0> 
         <BedDistBetweenPosts, 10, BedHeadBoardToHeadboardDist>
-}                          
+}; 
+                            
+
+// Bookshelf
+                               
+#declare BookshelfHeight = Foot*3;
+#declare BookshelfWidth = 25;
+#declare BookshelfLength = Foot*2;
+#declare BookshelfDepth = 24;
+#declare BookshelfBackThickness = BookshelfWidth - BookshelfDepth;
+#declare BookshelfMiddleShelfHeight = Foot *1.5;
+#declare BookshelfThickness = 2;
+
+#declare BookshelfSide = box{
+        <0,0,0>
+        <BookshelfThickness, BookshelfHeight, BookshelfWidth>
+};
+#declare BookshelfBottom = box{
+        <0,0,0>
+        <BookshelfLength, BookshelfThickness, BookshelfWidth> 
+};
+#declare BookshelfTop = object{
+        BookshelfBottom
+        translate <0, BookshelfHeight - BookshelfThickness, 0>
+};
+#declare BookshelfMiddleShelf = object{
+        BookshelfBottom
+        translate <0, BookshelfMiddleShelfHeight, 0>
+};
+#declare BookshelfBack = box{
+        <0,0,0>
+        <BookshelfLength, BookshelfHeight, BookshelfBackThickness> 
+};  
+#declare Bookshelf = merge{
+        object{ 
+                BookshelfSide
+        }
+        object{ 
+                BookshelfSide
+                translate <BookshelfLength - (BookshelfThickness * 2), 0, 0>
+        }
+        object{
+                BookshelfBack
+                translate <0,0,BookshelfDepth>
+        }      
+        object{ 
+                BookshelfTop 
+        }
+        object{
+                BookshelfMiddleShelf
+        }
+        object{
+                BookshelfBottom
+        }
+        texture{
+                BookshelfTexture
+        }
+}; 
+
+// Dresser
+
+#declare DresserHeight = Foot * 3.5;
+#declare DresserLength = Foot * 3;
+#declare DresserDepth = Foot * 2;
+#declare DresserBigDrawerHeight = Foot * 1.5;
+#declare DresserDistBetweenDrawers = 2;
+#declare DresserSmallDrawerHeight = Foot - DresserDistBetweenDrawers;
+#declare DresserDrawerPullThickness = 2.5;
+#declare DresserDrawerDistFromSides = 2.5;
+#declare DresserDrawerLength = DresserLength-(2*DresserDrawerDistFromSides);
+
+#declare DresserBody = box{
+        <0,0,0>
+        <DresserLength,DresserHeight, DresserDepth>
+};
+#declare DresserBottomDrawer = box{
+        <0,0,0>
+        <DresserDrawerLength, DresserBigDrawerHeight, DresserDrawerPullThickness>
+        translate <DresserDrawerDistFromSides, 0, 0>
+};
+#declare DresserMiddleDrawer = box{
+        <0,0,0>
+        <DresserDrawerLength, DresserSmallDrawerHeight, DresserDrawerPullThickness> 
+        translate <DresserDrawerDistFromSides, DresserBigDrawerHeight + DresserDistBetweenDrawers, 0>
+};
+#declare DresserTopDrawer = box{
+        <0,0,0>
+        <DresserDrawerLength, DresserSmallDrawerHeight, DresserDrawerPullThickness>
+        translate <DresserDrawerDistFromSides, DresserBigDrawerHeight + (DresserDistBetweenDrawers*2) + DresserSmallDrawerHeight, 0>
+};
+
+#declare Dresser = merge{
+        object{
+                DresserBody
+        }
+        object{
+                DresserBottomDrawer
+        }
+        object{
+                DresserMiddleDrawer
+        }
+        object{
+                DresserTopDrawer
+        }    
+        texture{
+                DresserTexture
+        }
+};    
+
+// Desk
+
+#declare DeskHeight = Foot * 3.5;
+#declare DeskLength = Foot * 3;
+#declare DeskWidth = Foot * 2;
+#declare DeskSideBoardWidth = 2.5;
+#declare DeskDrawersLength = Foot;
+#declare DeskSkinnyDrawerLength = DeskLength - (DeskDrawersWidth + (DeskSideBoardWidth*3));
+#declare DeskSkinnyDrawerHeight = 7.5; 
+#declare DeskDistBetweenDrawers = 2.5;
+#declare DeskBottomDrawerHeight = Foot * 1.5;
+#declare DeskMiddleDrawerHeight = 25;
+#declare DeskTopDrawerHeight = 25;
+
+#declare DeskSide = box{
+        <0,0,0>
+        <DeskSideBoardWidth, DeskHeight, DeskWidth>
+};
+#declare DeskSkinnyDrawer = box{
+        <0,0,0>
+        <DeskSkinnyDrawerLength, DeskSkinnyDrawerHeight, DeskWidth>
+};
+#declare DeskBottomDrawer = box{
+        <0,0,0>
+        <DeskDrawersLength, DeskBottomDrawerHeight, DeskWidth>
+};
+#declare DeskMiddleDrawer = box{
+        <0,0,0>
+        <DeskDrawersLength, DeskMiddleDrawerHeight, DeskWidth>
+};
+#declare DeskTopDrawer = box{
+        <0,0,0>
+        <DeskDrawersLength, DeskTopDrawerHeight, DeskWidth>
+};
+ 
+                 
   
   
   
@@ -288,4 +432,5 @@ merge{
         translate  <RoomWidth-10, 0,  RoomLength-LeftWindowDistFromWall>  
     }
 }
-object{BothWindowsills}  
+object{BothWindowsills}
+object{Floor}  

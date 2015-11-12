@@ -29,7 +29,7 @@ background{
 
 // Bed
 #declare BedCylinderDiameter = 2;
-#declare BedCylinderHeight = 5;
+#declare BedCylinderHeight = 7;
 #declare BedPostHeight = 60;
 #declare BedPostWidth = 5;
 #declare BedPostCutoutWidth = 2;
@@ -43,11 +43,13 @@ background{
 #declare BedHeadboardToHeadboardDist = Foot*5;
 #declare BedSpringSideHeight = 3;
 #declare BedSpringSideLength = 3;
-#declare BedSpringSideThickness = 1;
+#declare BedSpringSideThickness = 1; 
+#declare BedDistBetweenSpringSides = (BedDistBetweenPosts+(2*BedPostWidth))-((2*BedSpringSideThickness)+(2*BedPostCutoutDistFromEdge));
+#declare BedSpringSideCrossbarDiameter = 2;
 
 #declare BedCylinder = cylinder{
         <0,0,0>
-        <0, BedCylinderHeight + 2, 0>
+        <0, BedCylinderHeight, 0>
         BedCylinderDiameter
         open
 };
@@ -118,6 +120,31 @@ background{
                 BedSpringSideVertical
                 translate <BedSpringSideLength-BedSpringSideThickness,-BedSpringSideThickness,0>
         }
+}  
+#declare BedSpringLeftSide = merge{
+        object{ 
+                BedSpringSideHorizontal
+        }
+        object{
+                BedSpringSideVertical
+                translate <0,-BedSpringSideThickness, 0>
+        }
+}
+#declare BedSpringCrossbar = cylinder{
+        <0,0,0>
+        <0, BedDistBetweenSpringSides, 0>
+        BedSpringSideCrossbarDiameter
+        open
+}
+#declare BedSpringCrossbars = union{
+        #declare Index = 1;
+        #while (Index <4)
+                object{
+                        BedSpringCrossBar
+                        translate < (BedSpringSideThickness+BedPostCutoutDistFromEdge),10*Index,0>       
+                }
+                #declare Index = Index+1;
+        #end
 }
 
 object{BedHeadBoard}

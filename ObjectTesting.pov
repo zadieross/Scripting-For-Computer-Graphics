@@ -27,54 +27,97 @@ background{
      rgb <0.3,0,1>
 }
 
-// Dresser
+// Bed
+#declare BedCylinderDiameter = 2;
+#declare BedCylinderHeight = 5;
+#declare BedPostHeight = 60;
+#declare BedPostWidth = 5;
+#declare BedPostCutoutWidth = 2;
+#declare BedPostCutoutDepth = 2.5;
+#declare BedPostCutoutDistFromEdge = (BedPostWidth-BedPostCutoutWidth)/2;
+#declare BedCrossbarHeight = 10;
+#declare BedCrossbarWidth = 3;
+#declare BedDistBetweenPosts = 60;
+#declare BedCrossbarDistFromGround1 = 20;
+#declare BedCrossbarDistFromGround2 = 40;
+#declare BedHeadboardToHeadboardDist = Foot*5;
+#declare BedSpringSideHeight = 3;
+#declare BedSpringSideLength = 3;
+#declare BedSpringSideThickness = 1;
 
-#declare DresserHeight = 75.5;
-#declare DresserLength = 91;
-#declare DresserDepth = 61;
-#declare DresserBigDrawerHeight = 31;
-#declare DresserDistBetweenDrawers = 2.5;
-#declare DresserSmallDrawerHeight = 18;
-#declare DresserDrawerPullThickness = 2;
-#declare DresserDrawerDistFromSides = 2;
-#declare DresserDrawerLength = DresserLength-(2*DresserDrawerDistFromSides);
-
-#declare DresserBody = box{
+#declare BedCylinder = cylinder{
         <0,0,0>
-        <DresserLength,DresserHeight, DresserDepth>
+        <0, BedCylinderHeight + 2, 0>
+        BedCylinderDiameter
+        open
 };
-#declare DresserBottomDrawer = box{
+#declare BedPostCutout = box{
         <0,0,0>
-        <DresserDrawerLength, DresserBigDrawerHeight, DresserDrawerPullThickness>
-        translate <DresserDrawerDistFromSides, 0, -DresserDrawerPullThickness>
-};
-#declare DresserMiddleDrawer = box{
-        <0,0,0>
-        <DresserDrawerLength, DresserSmallDrawerHeight, DresserDrawerPullThickness> 
-        translate <DresserDrawerDistFromSides, DresserBigDrawerHeight + DresserDistBetweenDrawers, -DresserDrawerPullThickness>
-};
-#declare DresserTopDrawer = box{
-        <0,0,0>
-        <DresserDrawerLength, DresserSmallDrawerHeight, DresserDrawerPullThickness>
-        translate <DresserDrawerDistFromSides, DresserBigDrawerHeight + (DresserDistBetweenDrawers*2) + DresserSmallDrawerHeight, -DresserDrawerPullThickness>
+        <BedPostCutoutWidth, BedPostHeight, BedPostCutoutDepth>
 };
 
-#declare Dresser = merge{
-        object{
-                DresserBody
+#declare BedPost = difference{ 
+        merge{
+                box{  
+                        <0,0,0>
+                        <BedPostWidth, BedPostHeight, BedPostWidth>
+                }
+                object{
+                        BedCylinder
+                        translate <BedPostWidth/2, BedPostHeight-2, BedPostWidth/2>
+                }
         }
         object{
-                DresserBottomDrawer
+                BedPostCutout
+                translate <BedPostCutoutDistFromEdge,0,0>
         }
-        object{
-                DresserMiddleDrawer
-        }
-        object{
-                DresserTopDrawer
-        }    
-        texture{
-                DresserTexture
-        }
-};   
+};
 
-object{Dresser}
+#declare BedCrossbar = box{
+        <0,0,0>
+        <BedDistBetweenPosts,BedCrossbarHeight, BedCrossbarWidth>
+};
+
+#declare BedHeadBoard = merge{
+        object{
+                BedPost
+        }
+        object{
+                BedPost
+                translate <BedDistBetweenPosts+BedPostWidth,0,0>
+        }
+        object{
+                BedCrossbar
+                translate <BedPostWidth,BedCrossbarDistFromGround1,(BedPostWidth-BedCrossbarWidth)/2>
+        }
+        object{
+                BedCrossbar
+                translate <BedPostWidth,BedCrossbarDistFromGround2,(BedPostWidth-BedCrossbarWidth)/2>
+        }
+        texture{BedFrameTexture}
+};  
+
+#declare Mattress = box{ 
+        <0,0,0> 
+        <BedDistBetweenPosts, 10, BedHeadboardToHeadboardDist>
+};  
+
+#declare BedSpringSideHorizontal = box{
+        <0,0,0>
+        <BedSpringSideLength, BedSpringSideThickness, BedHeadboardToHeadboardDist>
+} 
+#declare BedSpringSideVertical = box{
+        <0,0,0>
+        <BedSpringSideThickness, BedSpringSideHeight, BedHeadboardToHeadboardDist>
+} 
+#declare BedSpringRightSide = merge{
+        object{ 
+                BedSpringSideHorizontal
+        }
+        object{
+                BedSpringSideVertical
+                translate <BedSpringSideLength-BedSpringSideThickness,-BedSpringSideThickness,0>
+        }
+}
+
+object{BedHeadBoard}

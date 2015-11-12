@@ -314,7 +314,7 @@ background{
 #declare DresserDepth = 61;
 #declare DresserBigDrawerHeight = 31;
 #declare DresserDistBetweenDrawers = 2.5;
-#declare DresserSmallDrawerHeight = Foot - DresserDistBetweenDrawers;
+#declare DresserSmallDrawerHeight = 18;
 #declare DresserDrawerPullThickness = 2;
 #declare DresserDrawerDistFromSides = 2;
 #declare DresserDrawerLength = DresserLength-(2*DresserDrawerDistFromSides);
@@ -326,17 +326,17 @@ background{
 #declare DresserBottomDrawer = box{
         <0,0,0>
         <DresserDrawerLength, DresserBigDrawerHeight, DresserDrawerPullThickness>
-        translate <DresserDrawerDistFromSides, 0, 0>
+        translate <DresserDrawerDistFromSides, 0, -DresserDrawerPullThickness>
 };
 #declare DresserMiddleDrawer = box{
         <0,0,0>
         <DresserDrawerLength, DresserSmallDrawerHeight, DresserDrawerPullThickness> 
-        translate <DresserDrawerDistFromSides, DresserBigDrawerHeight + DresserDistBetweenDrawers, 0>
+        translate <DresserDrawerDistFromSides, DresserBigDrawerHeight + DresserDistBetweenDrawers, -DresserDrawerPullThickness>
 };
 #declare DresserTopDrawer = box{
         <0,0,0>
         <DresserDrawerLength, DresserSmallDrawerHeight, DresserDrawerPullThickness>
-        translate <DresserDrawerDistFromSides, DresserBigDrawerHeight + (DresserDistBetweenDrawers*2) + DresserSmallDrawerHeight, 0>
+        translate <DresserDrawerDistFromSides, DresserBigDrawerHeight + (DresserDistBetweenDrawers*2) + DresserSmallDrawerHeight, -DresserDrawerPullThickness>
 };
 
 #declare Dresser = merge{
@@ -355,7 +355,7 @@ background{
         texture{
                 DresserTexture
         }
-};    
+};  
 
 // Desk
 

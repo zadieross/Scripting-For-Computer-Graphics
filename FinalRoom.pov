@@ -309,14 +309,14 @@ background{
 
 // Dresser
 
-#declare DresserHeight = Foot * 3.5;
-#declare DresserLength = Foot * 3;
-#declare DresserDepth = Foot * 2;
-#declare DresserBigDrawerHeight = Foot * 1.5;
-#declare DresserDistBetweenDrawers = 2;
+#declare DresserHeight = 75.5;
+#declare DresserLength = 91;
+#declare DresserDepth = 61;
+#declare DresserBigDrawerHeight = 31;
+#declare DresserDistBetweenDrawers = 2.5;
 #declare DresserSmallDrawerHeight = Foot - DresserDistBetweenDrawers;
-#declare DresserDrawerPullThickness = 2.5;
-#declare DresserDrawerDistFromSides = 2.5;
+#declare DresserDrawerPullThickness = 2;
+#declare DresserDrawerDistFromSides = 2;
 #declare DresserDrawerLength = DresserLength-(2*DresserDrawerDistFromSides);
 
 #declare DresserBody = box{
@@ -359,7 +359,7 @@ background{
 
 // Desk
 
-#declare DeskHeight = Foot * 3.5;
+#declare DeskHeight = 75.5;
 #declare DeskLength = Foot * 3;
 #declare DeskWidth = Foot * 2;
 #declare DeskSideBoardWidth = 2.5;

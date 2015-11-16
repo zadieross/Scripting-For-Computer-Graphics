@@ -1,0 +1,39 @@
+camera {
+        location <30,60,-125>
+        look_at <30,40,0>  
+} 
+
+light_source{
+    <-10,35,-10>
+    rgb <1,1,1> 
+} 
+light_source{
+    <10,60,-10>
+    rgb <1,1,1> 
+}
+light_source{
+    <10,35,-10>
+    rgb <1,1,1> 
+}
+
+
+background{
+     rgb <0.3,0,1>
+}                
+
+#declare Step = prism{
+        linear_sweep
+        linear_spline
+        0, 1
+        7 // add one bc you have to start & end at the same point
+        #declare Index = 0;
+        #while (Index <= 360)
+                <cos(radians(Index)),
+                sin (radians(Index))>
+                #declare Index = Index + 360/6;
+        #end
+}           
+
+
+
+object{Step}

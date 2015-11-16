@@ -5,9 +5,14 @@
 
 
 camera {
-        location <30,60,-125>
+        location <30,90,225>
         look_at <30,40,0>  
 } 
+
+/* 
+location <30,60,-125>
+        look_at <30,40,0> 
+*/
 
 light_source{
     <-10,35,-10>
@@ -19,6 +24,10 @@ light_source{
 }
 light_source{
     <10,35,-10>
+    rgb <1,1,1> 
+}
+light_source{
+    <30,90,200>
     rgb <1,1,1> 
 }
 
@@ -46,6 +55,7 @@ background{
 #declare BedSpringSideThickness = 1; 
 #declare BedDistBetweenSpringSides = (BedDistBetweenPosts+(2*BedPostWidth))-((2*BedSpringSideThickness)+(2*BedPostCutoutDistFromEdge));
 #declare BedSpringSideCrossbarDiameter = 2;
+#declare BedSpringDistFromFloor = 35;
 
 #declare BedCylinder = cylinder{
         <0,0,0>
@@ -102,6 +112,7 @@ background{
 #declare Mattress = box{ 
         <0,0,0> 
         <BedDistBetweenPosts, 10, BedHeadboardToHeadboardDist>
+        translate <BedPostWidth,BedSpringDistFromFloor,0>
 };  
 
 #declare BedSpringSideHorizontal = box{
@@ -112,14 +123,15 @@ background{
         <0,0,0>
         <BedSpringSideThickness, BedSpringSideHeight, BedHeadboardToHeadboardDist>
 } 
-#declare BedSpringRightSide = merge{
+#declare BedSpringRightSide = union{
         object{ 
                 BedSpringSideHorizontal
         }
         object{
                 BedSpringSideVertical
-                translate <BedSpringSideLength-BedSpringSideThickness,-BedSpringSideThickness,0>
+                translate <BedSpringSideLength-BedSpringSideThickness,-BedSpringSideHeight,0>
         }
+        translate <(BedPostCutoutDistFromEdge+BedDistBetweenSpringSides),BedSpringDistFromFloor,0>
 }  
 #declare BedSpringLeftSide = merge{
         object{ 
@@ -127,8 +139,9 @@ background{
         }
         object{
                 BedSpringSideVertical
-                translate <0,-BedSpringSideThickness, 0>
+                translate <0,-BedSpringSideHeight, 0>
         }
+        translate <BedPostCutoutDistFromEdge,BedSpringDistFromFloor,0>
 }
 #declare BedSpringCrossbar = cylinder{
         <0,0,0>
@@ -140,11 +153,37 @@ background{
         #declare Index = 1;
         #while (Index <4)
                 object{
-                        BedSpringCrossBar
+                        BedSpringCrossbar
                         translate < (BedSpringSideThickness+BedPostCutoutDistFromEdge),10*Index,0>       
                 }
                 #declare Index = Index+1;
         #end
+}
+
+#declare BedMattressSupport = union{
+        object{
+                BedSpringRightSide
+        }
+        object{
+                BedSpringLeftSide                
+        }                        
+        object{
+                BedSpringCrossbars
+        }
+        texture{BedSpringTexture}
+}  
+
+object{
+        BedSpringRightSide
+        texture{BedSpringTexture}
+} 
+object{
+        BedSpringLeftSide
+        texture{BedSpringTexture}
+}
+object{
+        BedSpringCrossbar
+        texture{BedSpringTexture}
 }
 
 object{BedHeadBoard}

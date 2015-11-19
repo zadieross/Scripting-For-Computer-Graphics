@@ -24,6 +24,11 @@
     pigment{
         rgb <0.2,0.8,0.2>
     }
+}
+#declare BedSpringTexture = texture{
+    pigment{
+        rgb .4
+    }
 }     
 
 //0.24,0.07,0.80>

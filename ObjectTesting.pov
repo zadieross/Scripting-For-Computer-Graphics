@@ -45,7 +45,7 @@ background{
 #declare BedPostCutoutDepth = 2.5;
 #declare BedPostCutoutDistFromEdge = (BedPostWidth-BedPostCutoutWidth)/2;
 #declare BedCrossbarHeight = 10;
-#declare BedCrossbarWidth = 3;
+#declare BedCrossbarWidth = 2;
 #declare BedDistBetweenPosts = 60;
 #declare BedCrossbarDistFromGround1 = 20;
 #declare BedCrossbarDistFromGround2 = 40;
@@ -56,6 +56,7 @@ background{
 #declare BedDistBetweenSpringSides = (BedDistBetweenPosts+(2*BedPostWidth))-((2*BedSpringSideThickness)+(2*BedPostCutoutDistFromEdge));
 #declare BedSpringSideCrossbarDiameter = 2;
 #declare BedSpringDistFromFloor = 35;
+#declare BedDisBetweenSpringCrossbars =35;
 
 #declare BedCylinder = cylinder{
         <0,0,0>
@@ -90,7 +91,7 @@ background{
         <BedDistBetweenPosts,BedCrossbarHeight, BedCrossbarWidth>
 };
 
-#declare BedHeadBoard = merge{
+#declare BedHeadboard = merge{
         object{
                 BedPost
         }
@@ -145,19 +146,19 @@ background{
 }
 #declare BedSpringCrossbar = cylinder{
         <0,0,0>
-        <0, BedDistBetweenSpringSides, 0>
+        <BedDistBetweenSpringSides, 0, 0>
         BedSpringSideCrossbarDiameter
         open
 }
 #declare BedSpringCrossbars = union{
         #declare Index = 1;
-        #while (Index <4)
+        #while (Index <=4)
                 object{
                         BedSpringCrossbar
-                        translate < (BedSpringSideThickness+BedPostCutoutDistFromEdge),10*Index,0>       
+                        translate < (BedSpringSideThickness+BedPostCutoutDistFromEdge),BedSpringDistFromFloor - (BedSpringSideCrossbarDiameter/2),BedDisBetweenSpringCrossbars*Index>       
                 }
                 #declare Index = Index+1;
-        #end
+        #end 
 }
 
 #declare BedMattressSupport = union{
@@ -173,17 +174,17 @@ background{
         texture{BedSpringTexture}
 }  
 
-object{
-        BedSpringRightSide
-        texture{BedSpringTexture}
+#declare Bed = merge{
+        object {
+                BedMattressSupport
+        }
+        object{
+                BedHeadboard
+        }
+        object{
+                BedHeadboard 
+                translate <0,0, BedHeadboardToHeadboardDist>
+        } 
 } 
-object{
-        BedSpringLeftSide
-        texture{BedSpringTexture}
-}
-object{
-        BedSpringCrossbar
-        texture{BedSpringTexture}
-}
 
-object{BedHeadBoard}
+object{Bed}

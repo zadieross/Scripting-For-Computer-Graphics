@@ -35,6 +35,13 @@
     pigment{
         rgb <0.2,0.8,0.2>
     }
+}  
+
+//      Desk
+#declare DeskTexture = texture{
+    pigment{
+        rgb <0.7,0.6,0.1>
+    }
 }
      
 

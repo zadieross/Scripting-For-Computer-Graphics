@@ -4,7 +4,7 @@
 #declare Foot = 30.5; //I am aware that setting to cm & using this but cm is better at small items 
 
 #declare RoomWidth = Foot * 20;
-#declare RoomLength = 420;
+#declare RoomLength = Foot * 20;
 #declare RoomHeight = Foot * 10;
 
 #declare HalfRoomWidth = RoomWidth/2;
@@ -45,6 +45,7 @@
 
 
 
+
 //Camera & some other useful locations
 
 #declare RoomCenter = <HalfRoomWidth, StandingEyeHeight, HalfRoomLength>;
@@ -61,8 +62,8 @@
 #declare BottomWallLook = <HalfRoomWidth, StandingEyeHeight, 0>;
 
 camera{
-    location FionaBedPos
-    look_at ZadieBedPos
+    location LeftWallLook
+    look_at RightWallLook
 }
 
 //Lights 
@@ -103,24 +104,48 @@ background{
 } 
 
 
+//Window cut out boxes  
+
+// the actual depth of the cutout's is 63 (like the added floor space that isn't accounted for by RoomBox)
+
+#declare WindowCutoutDistFromCeiling = 10;
+#declare LeftWindowCutoutWidth = Foot * 3.5;
+#declare RightWindowCutoutWidth = 105;
+#declare WindowCutoutDepth = Foot * 3.5;
+#declare LeftWindowCutoutDistFromWall = Foot; 
+#declare RightWindowCutoutDistFromWall = 46;           
+
+#declare LeftWindowCutout = box{
+        <0,0,0>
+        <WindowCutoutDepth, RoomHeight - WindowCutoutDistFromCeiling, LeftWindowCutoutWidth>
+        texture{WallTexture}  
+        translate <RoomWidth-WindowCutoutDepth,0, RoomLength -(LeftWindowCutoutWidth+LeftWindowCutoutDistFromWall)> 
+};  
+#declare RightWindowCutout = box{
+        <0,0,0>
+        <WindowCutoutDepth, RoomHeight - WindowCutoutDistFromCeiling, RightWindowCutoutWidth>
+        texture{WallTexture}  
+        translate <RoomWidth-WindowCutoutDepth,0,RightWindowCutoutDistFromWall>
+};
+
 //Windows
 
-#declare WindowHeight = Foot * 4;
+#declare WindowHeight = 138;
 #declare WindowDepth = 200;
-#declare WindowWidth = Foot * 2;
+#declare WindowWidth = 80;
 
 #declare WindowBox = box{
     <-WindowWidth/2, 0, -WindowDepth/2> 
     <WindowWidth/2, WindowHeight, WindowDepth/2>
 }; 
 
-#declare LeftWindowDistFromWall = Foot * 2;
-#declare RightWindowDistFromWall = Foot * 2;
+#declare LeftWindowDistFromWall = 10;
+#declare RightWindowDistFromWall = 10;
 #declare WindowDistFromFloor = (Foot * 2) + 10;  
 
 #declare WindowRotation = <0,90,0>; 
-#declare LeftWindowVector = <RoomWidth, WindowDistFromFloor, RoomLength-LeftWindowDistFromWall>;
-#declare RightWindowVector = <RoomWidth, WindowDistFromFloor, RightWindowDistFromWall>;
+#declare LeftWindowVector = <RoomWidth, WindowDistFromFloor, RoomLength-(WindowWidth)>;
+#declare RightWindowVector = <RoomWidth, WindowDistFromFloor, WindowWidth+RightWindowDistFromWall>;
 
 #declare LeftWindow = object{
     WindowBox
@@ -164,34 +189,63 @@ background{
     object{LeftWindowsill}
     object{RightWindowsill}
 };  
-  
-//Window cut out boxes
+   
+#declare RoomTiltBoxWithCutouts = difference{
+        object{
+                RoomTiltBox    
+        } 
+        object{
+                BothWindows
+        }
+        object{
+                LeftWindowCutout
+        } 
+        object{
+                RightWindowCutout
+        }
+}   
 
-#declare WindowCutoutDistFromCeiling = 10;
-#declare LeftWindowCutoutWidth = Foot * 3.5;
-#declare RightWindowCutoutWidth = Foot * 3.5;
-#declare WindowCutoutDepth = Foot * 3.5;
-
-#declare LeftWindowCutout = box{
-        <0,0,0>
-        <WindowCutoutDepth, RoomHeight - WindowCutoutDistFromCeiling, LeftWindowCutoutWidth>
-        texture{WallTexture}
-};
+#declare AllArchectecture = union{
+        merge{
+                difference{
+                       object{
+                                RoomBox
+                                scale 1.01
+                       }
+                       object{
+                                RoomBox
+                       }
+                       object{
+                                BothWindows
+                       }
+                         /* object{
+                                LeftWindowCutout
+                                translate  <RoomWidth, 0,  RoomLength-LeftWindowDistFromWall>  
+                        }*/   
+                }
+                object{
+                        RoomTiltBoxWithCutouts
+                }       
+                
+        }
+object{BothWindowsills}
+object{Floor}
+}
   
 // Bed
 #declare BedCylinderDiameter = 2;
 #declare BedCylinderHeight = 7;
-#declare BedPostHeight = 60;
+#declare BedPostHeight = 92;
 #declare BedPostWidth = 5;
 #declare BedPostCutoutWidth = 2;
 #declare BedPostCutoutDepth = 2.5;
 #declare BedPostCutoutDistFromEdge = (BedPostWidth-BedPostCutoutWidth)/2;
 #declare BedCrossbarHeight = 10;
 #declare BedCrossbarWidth = 2;
-#declare BedDistBetweenPosts = 60;
-#declare BedCrossbarDistFromGround1 = 20;
-#declare BedCrossbarDistFromGround2 = 40;
-#declare BedHeadboardToHeadboardDist = Foot*5;
+#declare BedDistBetweenPosts = 84;
+#declare BedCrossbarDistFromGround1 = 73;
+#declare BedCrossbarDistFromGround2 = 42;
+#declare BedHeadboardToHeadboardDist = 200;
 #declare BedSpringSideHeight = 3;
 #declare BedSpringSideLength = 3;
 #declare BedSpringSideThickness = 1; 
@@ -518,14 +572,15 @@ background{
         translate < -300, -SeatedOnBedHeight, -15>
 } 
 #declare ZadieDresser = object{
-        Dresser 
+        Dresser  
+        rotate <0,180,0>
         translate ZadieBedPos
-        translate < -400, -SeatedOnBedHeight, -15>
+        translate < -300, -SeatedOnBedHeight, 20>
 }                       
 #declare ZadieBookshelf = object{
         Bookshelf
         translate ZadieBedPos
-        translate <-100, -SeatedOnBedHeight, BedLength>
+        translate <-100, -(SeatedOnBedHeight), BedLength + 5>
 }
 #declare ZadieFurniture = union{
         object{ 
@@ -541,55 +596,40 @@ background{
                 ZadieBookshelf
         }
 }
-object{
-        ZadieFurniture
-}                
-  
-  
-  
-  //objects/room actually called
-  
-merge{
-    difference{
-        object{
-            RoomBox
-            scale 1.01
-        }
-        object{
-            RoomBox
-        }
-        object{
-            BothWindows
-        }
-        object{
-                LeftWindowCutout
-                translate  <RoomWidth, 0,  RoomLength-LeftWindowDistFromWall>  
-        }   
-    }       
-    difference{
-        object{
-            RoomTiltBox    
-        }
-        object{
-            BothWindows
-        } 
-        object{
-            LeftWindowCutout
-            translate  <RoomWidth-WindowCutoutDepth, 0,  RoomLength-LeftWindowDistFromWall>  
-        }
-    }
-   object{
-        LeftWindowCutout
-        translate  <RoomWidth-10, 0,  RoomLength-LeftWindowDistFromWall>  
-    }
-}
-object{BothWindowsills}
-object{Floor}
 
-                         
-object{
+// Fiona Furniture              
+  
+#declare FionaBed = object{
         Bed
         translate FionaBedPos
         translate < 0, -SeatedOnBedHeight, 0>
 }
+#declare FionaFurniture = union{
+        object{
+                FionaBed      
+                rotate <0, 90, 0>
+                translate <-200, 0, 300>
+        }
+}
 
+
+#declare BothFurniture = union{
+        object{ 
+                ZadieFurniture
+        }
+        object{ 
+                FionaFurniture
+        }
+} 
+
+  
+  
+  //objects/room actually called
+  
+object{AllArchectecture}      
+//object{BothFurniture}
+
+                         
+
+                                   
+                                   

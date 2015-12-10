@@ -36,73 +36,13 @@ background{
      rgb <0.3,0,1>
 }
  
-#declare DeskHeight = 75.5;
-#declare DeskLength = 106.5;
-#declare DeskWidth = 61;
-#declare DeskSideBoardWidth = 2;
-#declare DeskDrawersLength = 40.5;
-#declare DeskSkinnyDrawerLength = DeskLength - (DeskDrawersLength + (DeskSideBoardWidth*3));
-#declare DeskSkinnyDrawerHeight = 7.5; 
-#declare DeskDistBetweenDrawers = 2.5;
-#declare DeskBottomDrawerHeight = Foot * 1.5;
-#declare DeskMiddleDrawerHeight = 25;
-#declare DeskTopDrawerHeight = 25;
+// YellowSaltBowl
 
-#declare DeskSide = box{
-        <0,0,0>
-        <DeskSideBoardWidth, DeskHeight, DeskWidth>
-};
-#declare DeskSkinnyDrawer = box{
-        <0,0,0>
-        <DeskSkinnyDrawerLength, DeskSkinnyDrawerHeight, DeskWidth>
-};
-#declare DeskBottomDrawer = box{
-        <0,0,0>
-        <DeskDrawersLength, DeskBottomDrawerHeight, DeskWidth>
-};
-#declare DeskMiddleDrawer = box{
-        <0,0,0>
-        <DeskDrawersLength, DeskMiddleDrawerHeight, DeskWidth>
-};
-#declare DeskTopDrawer = box{
-        <0,0,0>
-        <DeskDrawersLength, DeskTopDrawerHeight, DeskWidth>
-};
-#declare DeskTop = box{
-        <0,0,0>
-        <DeskLength, DeskSideBoardWidth, DeskWidth>
-}
-#declare Desk = union{
-        object{
-                DeskSide 
-                translate < DeskLength, 0, 0>
-        }
-        object{
-                DeskSide
-        }
-        object{
-                DeskSkinnyDrawer
-                translate <DeskDrawersLength, DeskHeight - DeskSkinnyDrawerHeight, 0>
-        } 
-        object{
-                DeskBottomDrawer
-        }
-        object{
-                DeskMiddleDrawer
-                translate <0, DeskBottomDrawerHeight + DeskDistBetweenDrawers, 0>
-        }
-        object{
-                DeskTopDrawer
-        }
-        object{                                         
-                DeskTop
-                translate <0, DeskHeight, 0>
-        }
-        texture{
-                DeskTexture
-        }
+#declare YellowSaltBowl = lathe{
+        cubic_spline
+        <0,0>
 }             
 
 object{
-        Desk
+        
 }

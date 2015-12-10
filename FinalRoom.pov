@@ -3,7 +3,7 @@
 //1 unit = 1 cm
 #declare Foot = 30.5; //I am aware that setting to cm & using this but cm is better at small items 
 
-#declare RoomWidth = Foot * 20;
+#declare RoomWidth = Foot * 16;
 #declare RoomLength = Foot * 20;
 #declare RoomHeight = Foot * 10;
 
@@ -37,7 +37,7 @@
 #declare Floor = box{
     <0,-5,0>
     <RoomWidth, .001, RoomLength>
-    texture{
+    texture{             
         FloorTexture
     }
 };
@@ -62,8 +62,8 @@
 #declare BottomWallLook = <HalfRoomWidth, StandingEyeHeight, 0>;
 
 camera{
-    location LeftWallLook
-    look_at RightWallLook
+    location RoomCenter - <40,0,-25>
+    look_at ZadieBedPos
 }
 
 //Lights 
@@ -119,13 +119,13 @@ background{
         <0,0,0>
         <WindowCutoutDepth, RoomHeight - WindowCutoutDistFromCeiling, LeftWindowCutoutWidth>
         texture{WallTexture}  
-        translate <RoomWidth-WindowCutoutDepth,0, RoomLength -(LeftWindowCutoutWidth+LeftWindowCutoutDistFromWall)> 
+        translate <RoomWidth-WindowCutoutDepth + .01,0, RoomLength -(LeftWindowCutoutWidth+LeftWindowCutoutDistFromWall)> 
 };  
 #declare RightWindowCutout = box{
         <0,0,0>
         <WindowCutoutDepth, RoomHeight - WindowCutoutDistFromCeiling, RightWindowCutoutWidth>
         texture{WallTexture}  
-        translate <RoomWidth-WindowCutoutDepth,0,RightWindowCutoutDistFromWall>
+        translate <RoomWidth-WindowCutoutDepth + .01,0,RightWindowCutoutDistFromWall>
 };
 
 //Windows
@@ -156,7 +156,87 @@ background{
     WindowBox
     rotate WindowRotation
     translate RightWindowVector
-};
+}; 
+
+//Window Frame
+
+#declare WindowFrameHeight = 75;
+#declare WindowFrameInnerHeight = 67;
+#declare WindowFrameDepth = 5.5;
+#declare WindowFrameInnerWidth = 68;
+#declare WindowFrameMiddleCrossbarHeight = 32;
+#declare WindowFrameCrossbarWidth = 2;
+#declare WindowFrameVerticalCrossbarDistFromEdge = 26;
+
+#declare WindowFrameOuterBox = box{
+        <0,0,0>
+        <WindowFrameDepth, WindowFrameHeight, WindowWidth>
+}                                                               
+#declare WindowFrameInnerCutout = box{
+        <-1,0,0>
+        <WindowFrameDepth+2, WindowFrameInnerHeight, WindowFrameInnerWidth>
+}  
+#declare WindowOuterFrame = difference{
+        object{
+                WindowFrameOuterBox
+        }
+        object{
+                WindowFrameInnerCutout
+                translate <0, (WindowFrameHeight-WindowFrameInnerHeight)/2, (WindowWidth - WindowFrameInnerWidth)/2>
+        } 
+}             
+#declare WindowFrameHorizontalCrossbar = box{
+        <0,0,0>
+        <WindowFrameDepth, WindowFrameCrossbarWidth, WindowFrameInnerWidth>
+} 
+#declare WindowFrameVerticalCrossbar = box{
+        <0,0,0>
+        <WindowFrameDepth, WindowFrameInnerHeight, WindowFrameCrossbarWidth>
+}
+#declare WindowFrame = merge{
+        object{
+                WindowFrameOuterBox
+        }
+        object{
+                WindowFrameHorizontalCrossbar
+                translate <0, WindowFrameMiddleCrossbarHeight, (WindowWidth - WindowFrameInnerWidth)/2> 
+        }
+        object{
+                WindowFrameVerticalCrossbar
+                translate <0.001, (WindowFrameHeight-WindowFrameInnerHeight)/2, WindowFrameVerticalCrossbarDistFromEdge>
+        }
+        object{
+                WindowFrameVerticalCrossbar
+                translate <0.001, (WindowFrameHeight-WindowFrameInnerHeight)/2, (WindowFrameVerticalCrossbarDistFromEdge*2)+WindowFrameCrossbarWidth>
+        }
+        texture{WindowFrameTexture}
+}
+#declare FullWindowFrame = union{
+        object{
+                WindowFrame
+        }
+        object{
+                WindowFrame
+                translate <-WindowFrameDepth,WindowHeight-WindowFrameHeight,0>
+        }
+} 
+#declare BothWindowFrames = union{
+        object{ 
+                WindowFrame
+                translate RightWindowVector
+        }
+        object{ 
+                WindowFrame
+                translate LeftWindowVector
+        }
+        texture {WindowFrameTexture}
+}
+  /*object{
+        WindowFrame
+        translate RightWindowVector
+  }*/
+
+
     //Windowsills
 #declare WindowsillOverhang = 10;
 #declare WindowsillHeight = 3;
@@ -228,8 +308,8 @@ background{
                 }       
                 
         }
-object{BothWindowsills}
-object{Floor}
+        object{BothWindowsills}
+        object{Floor}
 }
   
 // Bed
@@ -558,7 +638,20 @@ object{Floor}
         texture{
                 DeskTexture
         }
-}
+}  
+
+// Door
+
+#declare DoorHeight = 204;
+#declare DoorWidth = 76;
+#declare DoorDepth = 10;
+#declare DoorTopCutoutHeight = 30;
+#declare DoorBottomCutoutHeight = 30;
+#declare DoorTopCutoutWidth = 30;
+#declare DoorBottomCutoutWidth = 30;
+#declare DoorCutoutDepth = 3;
+#declare DoorKnobHeight = Foot *3;
+
  
 // Zadie Furniture
 #declare ZadieBed = object{
@@ -602,13 +695,13 @@ object{Floor}
 #declare FionaBed = object{
         Bed
         translate FionaBedPos
-        translate < 0, -SeatedOnBedHeight, 0>
+        rotate <0, 90, 0>
+        translate < 70-RoomLength, -SeatedOnBedHeight, RoomWidth>
 }
 #declare FionaFurniture = union{
         object{
                 FionaBed      
-                rotate <0, 90, 0>
-                translate <-200, 0, 300>
+                
         }
 }
 
@@ -627,7 +720,7 @@ object{Floor}
   //objects/room actually called
   
 object{AllArchectecture}      
-//object{BothFurniture}
+object{BothFurniture}
 
                          
 

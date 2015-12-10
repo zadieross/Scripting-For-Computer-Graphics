@@ -5,7 +5,7 @@
 
 
 camera {
-        location <30,90,225>
+        location <10,5,-25>
         look_at <0,0,0>  
 } 
 
@@ -38,11 +38,16 @@ background{
  
 // YellowSaltBowl
 
+             
 #declare YellowSaltBowl = lathe{
         cubic_spline
-        <0,0>
-}             
-
+        9
+        <5,-1>,<6,0.5>,<7,1>,
+        <13,2>,<11,5>,<13,3>,
+        <10,7>,<12,4>,<0,4>
+        texture{BowlTexture}
+}     
+    
 object{
-        
+  YellowSaltBowl      
 }

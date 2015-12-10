@@ -6,7 +6,7 @@
 
 camera {
         location <30,90,225>
-        look_at <30,40,0>  
+        look_at <0,0,0>  
 } 
 
 /* 
@@ -36,11 +36,13 @@ background{
      rgb <0.3,0,1>
 }
  
-//Chair
-#declare ChairSeatWidth = 40;
-#declare  
+// YellowSaltBowl
 
+#declare YellowSaltBowl = lathe{
+        cubic_spline
+        <0,0>
+}             
 
 object{
-
+        
 }
